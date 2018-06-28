@@ -1,1 +1,49 @@
 Python2.7环境搭建
+脚本默认运行环境是windows环境，（除了第三步MAC、Linux环境可以通过pip进行安装）
+python版本2.7
+#本人测试使用python3.6，无奈安装pycrypto库超级复杂，一直错误不断，希望某日碰到合适的pycrypto-2.6.1.win32-py3.6.exe
+
+安装过程
+1.安装python和配置Python2.7的环境变量
+Windows下双击安装python-2.7.9.amd64.msi即可
+
+2.安装setuptools
+安装包下载地址：
+解压setuptools-20.9.0.tar.gz
+安装命令如下
+python setup.py build
+python setup.py install
+
+3.安装pycrypto
+双击安装pycrypto-2.6.win-amd64-py2.7.exe即可
+
+
+##############################
+使用pip源安装替代分别下载安装包（用于替代4到6步过程。）
+4.1 安装pip
+我安装的版本是pip-9.0.1
+DOS窗口进入pip所在目录，输入命令python setup.py instatll
+
+4.2  添加pip环境变量
+pip默认安装在C:\Python27\Scripts，参考步骤1.2，将该目录添加到环境变量
+ 
+4.3  设置pip源
+进入你的文件目录 C:\Users\%USERNAME%，创建pip文件夹（默认应该已经有这个目录了），进入pip文件夹内创建pip.ini文件，输入以下内容
+[global]
+index-url = http://rnd-mirrors.huawei.com/pypi/simple/
+[install]
+trusted-host=rnd-mirrors.huawei.com
+
+其它支撑包：
+pip install ecdsa
+pip install paramiko
+pip install xlrd
+pip install xlwt
+pip install xlutils
+pip install pymysql
+pip install pyyaml
+pip install openpyxl
+pip install docx
+
+使用pip卸载已安装的包
+pip uninstall 库名，然后使用pip list 可以查看是否已卸载成功
