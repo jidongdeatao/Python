@@ -1,0 +1,18 @@
+在程序运行的过程中，边运行边打印调试日子，此时需要开启DebugLog
+开启DebugLog的方法：
+
+import urllib.request
+#设置日志级别
+httpd = urllib.request.HTTPHandler(debuglevel=1)
+httpshd = urllib.request.HTTPSHandler(debuglevel=1)
+#创建带有设定好日志级别的全局默认的opener对象，这样，在使用urlopen()时，也会使用安装的opener对象
+opener = urllib.request.build_opener(httpd,httpshd)
+urllib.request.install_opener(opener)
+file = urllib.request.urlopen("http://www.baidu.com")
+data =file.read().decode('utf-8')
+#print(len(data))
+
+结果：
+send: b'GET / HTTP/1.1\r\nAccept-Encoding: identity\r\nHost: www.baidu.com\r\nUser-Agent: Python-urllib/3.6\r\nConnection: close\r\n\r\n'
+reply: 'HTTP/1.1 200 OK\r\n'
+header: Bdpagetype header: Bdqid header: Cache-Control header: Content-Type header: Cxy_all header: Date header: Expires header: P3p header: Server header: Set-Cookie header: Set-Cookie header: Set-Cookie header: Set-Cookie header: Set-Cookie header: Set-Cookie header: Vary header: X-Ua-Compatible header: Connection header: Transfer-Encoding 
