@@ -5,10 +5,37 @@
     提取出User-Agent的值
     User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0) Gecko/20100101 Firefox/60.0
   2.让爬虫模拟浏览器去访问网页
-    （这里不使用urlopen(),是应为这个函数不支持http高级功能）
+    
     方法一：
-      使用build_opener()修改报头
+      使用build_opener()修改报头（这里不使用urlopen(),是应为这个函数不支持修改报头，只能增加报头，参见方法二）
       
+      import urllib.request
+      #这里是网址要求使用https安全协议，使用这个命令可以关闭客户端认证
+      import ssl
+      ssl._create_default_https_context = ssl._create_unverified_context
+      
+      url = "http://blog.csdn.net/weiwei_pig/article/details/51178226"
+      headers=('User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0) Gecko/20100101 Firefox/60.0')
+      opener = urllib.request.build_opener()
+      opener.addheaders =[headers]
+      file = opener.open(url)
+   
+      data = file.read()
+      fhandle = open("data.html","wb")
+      fhandle.write(data)
+      fhandle.close()
     方法二：
       使用add_header()添加报头
       
+      import urllib.request
+      import ssl
+      ssl._create_default_https_context = ssl._create_unverified_context
+      url = "http://blog.csdn.net/weiwei_pig/article/details/51178226"
+      req = urllib.request.Request(url)
+      req.add_header('User-Agent','Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0) Gecko/20100101 Firefox/60.0')
+      file = urllib.request.urlopen(req)
+      
+      data = file.read()
+      fhandle = open("data.html","wb")
+      fhandle.write(data)
+      fhandle.close()
