@@ -1,5 +1,17 @@
 python3中使用Cookiejar库来处理cookie
 
+CookieJar()的使用方法
+      import http.cookiejar
+      #使用http.cookiejar.CookieJar() 创建CookieJar对象
+      cjar = http.cookiejar.Cookiejar()
+      #使用HTTPCOokieProcessor创建cookie处理器，并以其为参数构建opener对象
+      opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cjar))
+      #将opener安装为全局
+      urllib.request.install_opener(opener)
+      #接下来为正常的打开指定的URL过程
+      file = opener.open(url)
+
+
 什么是Cookie？
 概括来说，就是保存会话信息，帮助维持会话状态的一种方式
 与HTTP协议有关。我们访问的每一个互联网页面，都是通过HTTP协议进行，而HTTP协议是一个无状态协议，无法维持会话之间的状态
