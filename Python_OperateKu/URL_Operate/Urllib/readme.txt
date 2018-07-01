@@ -7,7 +7,7 @@
   方法一：
     1）从网页获取数据
       import urllib.request
-      file = urllib.request.urlopen("http://www.cn.baidu.com")
+      file = urllib.request.urlopen("http://www.baidu.com")
 
       ##################以下为三种读取页面的方式#####################
 
@@ -28,7 +28,11 @@
       fhandle.write(data)
       fhandle.close() 
    方法二：
-    fil
+      import urllib.request
+      filename = urllib.request.urlretrieve("http://www.baidu.com",filename="data.html")
+      
+      #urlretrieve()函数执行的时候会产生缓存，需要使用urlcleanup()函数进行清除
+      urllib.request.urlcleanup()
     
     
    
