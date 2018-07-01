@@ -1,0 +1,13 @@
+#有些网页为了防止别人恶意采集其信息，进行了一些反爬虫机制
+#所以设置Headers信息 来模拟浏览器去访问这些网站
+步骤：
+  1.使用浏览器去访问正常网站，从浏览器“开发者工具”-“网络”中
+    提取出User-Agent的值
+    User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0) Gecko/20100101 Firefox/60.0
+  2.让爬虫模拟浏览器去访问网页
+    方法一：
+      使用build_opener()修改报头
+      
+    方法二：
+      使用add_header()添加报头
+      
