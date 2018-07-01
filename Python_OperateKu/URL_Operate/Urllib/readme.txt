@@ -65,9 +65,18 @@
         #获取返回码
         getcode = file.getcode()
         #print(getcode)
-
+        3)
         #获取爬取的网页URL
         geturl = file.geturl()
         #print(geturl)
-    
-   
+        4)
+        #为啥URL网址需要编码
+        #URL标准中只会允许一部分ASICII字符比如：数字、字母、部分符号等，其他字符（包括汉字、：、&）如果要在URL中使用需要先进行编码
+
+        #对URL进行编码
+        quote_url = urllib.request.quote("http://www.sina.com.cn")
+        print(quote_url)
+
+        #对编码的URL进行解码
+        unquote_url = urllib.request.unquote("http%3A//www.sina.com.cn")
+        print(unquote_url)
