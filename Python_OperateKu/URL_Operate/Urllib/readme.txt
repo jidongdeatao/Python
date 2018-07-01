@@ -34,5 +34,40 @@
       #urlretrieve()函数执行的时候会产生缓存，需要使用urlcleanup()函数进行清除
       urllib.request.urlcleanup()
     
+3.Urllib的常见用法
+    import urllib.request
+    file = urllib.request.urlopen("http://www.baidu.com")
+      命令：
+        1）
+        #获取爬取网页的环境信息，以下为爬取百度首页返回的info
+        info = file.info()
+        #print(info)
+          # Bdpagetype: 1
+          # Bdqid: 0xcbc019b5000082d2
+          # Cache-Control: private
+          # Content-Type: text/html
+          # Cxy_all: baidu+22ba0c02535743a893b966956094582a
+          # Date: Sun, 01 Jul 2018 02:54:38 GMT
+          # Expires: Sun, 01 Jul 2018 02:53:46 GMT
+          # P3p: CP=" OTI DSP COR IVA OUR IND COM "
+          # Server: BWS/1.1
+          # Set-Cookie: BAIDUID=734CBA39D1D2FA96FB972FB811D40AA7:FG=1; expires=Thu, 31-Dec-37 23:55:55 GMT; max-age=2147483647; path=/; domain=.baidu.com
+          # Set-Cookie: BIDUPSID=734CBA39D1D2FA96FB972FB811D40AA7; expires=Thu, 31-Dec-37 23:55:55 GMT; max-age=2147483647; path=/; domain=.baidu.com
+          # Set-Cookie: PSTM=1530413678; expires=Thu, 31-Dec-37 23:55:55 GMT; max-age=2147483647; path=/; domain=.baidu.com
+          # Set-Cookie: BDSVRTM=0; path=/
+          # Set-Cookie: BD_HOME=0; path=/
+          # Set-Cookie: H_PS_PSSID=1438_21100_20928; path=/; domain=.baidu.com
+          # Vary: Accept-Encoding
+          # X-Ua-Compatible: IE=Edge,chrome=1
+          # Connection: close
+          # Transfer-Encoding: chunked
+        2）
+        #获取返回码
+        getcode = file.getcode()
+        #print(getcode)
+
+        #获取爬取的网页URL
+        geturl = file.geturl()
+        #print(geturl)
     
    
