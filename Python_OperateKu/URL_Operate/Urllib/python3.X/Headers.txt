@@ -5,6 +5,7 @@
     提取出User-Agent的值
     User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0) Gecko/20100101 Firefox/60.0
   2.让爬虫模拟浏览器去访问网页
+    （这里不使用urlopen(),是应为这个函数不支持http高级功能）
     方法一：
       使用build_opener()修改报头
       
