@@ -1,0 +1,25 @@
+#根据自己的需要设置超时时间
+设置是通过添加urlopen()函数的参数timeout
+格式是：urllib.request.urlopen(要打开的网址,timeout=时间值)
+如果不想出现超时异常，将timeout的值设置大一些（比如30）即可
+
+举例：超时设置为0.5秒钟
+    import urllib.request
+    url = "http://iqianyue.com"
+    for i in range(100):
+        try:
+            file = urllib.request.urlopen(url,timeout=0.5)
+            data = file.read()
+            print(len(data))
+        except Exception as e:
+            print("出现异常-->" + str(e))
+            
+    结果：
+        # 17094
+        # 16996
+        # 16919
+        # 出现异常 -->timed
+        # out
+        # 16797
+        # 16951
+        # 16799
