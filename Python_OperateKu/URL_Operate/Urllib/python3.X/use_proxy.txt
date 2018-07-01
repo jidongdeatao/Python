@@ -1,0 +1,22 @@
+#设置代理服务器
+#是为了针对网站服务器会屏蔽使用一个IP长时间恶意访问非法的行为
+
+方法：
+def use_proxy(proxy_addr,url):
+    import urllib.request
+    proxy = urllib.request.ProxyHandler({'http':proxy_addr})
+    opener = urllib.request.build_opener(proxy,urllib.request.HTTPHandler)
+    urllib.request.install_opener(opener)
+    file = urllib.request.urlopen(url)
+    data = file.read().decode('utf-8')
+    return data
+url = "http://www.baidu.com"
+proxy_addr ="111.155.116.238:8123"
+data = use_proxy(proxy_addr,url)
+print(data)
+
+代理服务器资源：
+http://www.xicidaili.com/
+
+
+这些代理服务器IP地址不稳定，十之八九不能用，所以需要另一个方法进行筛选代理服务器IP
