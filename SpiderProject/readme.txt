@@ -43,4 +43,13 @@
   
   
   
-  
+  Python中常见的爬虫框架有：
+    1）Scrapy框架
+    2）Crawley框架
+    3）Portia框架
+    4）newspaper框架
+    5）python-goose框架
+    
+    
+    
+
