@@ -47,3 +47,7 @@ pip install docx
 
 使用pip卸载已安装的包
 pip uninstall 库名，然后使用pip list 可以查看是否已卸载成功
+
+另外，pip的用法
+pip show --files 项目名称。  
+可以看到项目内部构成
