@@ -24,4 +24,17 @@
  开发及生产管理  ：
   CentOS+python3+mysql+html5+flask+nginx
   
-  
+  前后台项目目录分析：
+    前台（home）：
+      数据模型：models.py
+      表单处理：home/forms.py
+      模版目录：templates/home
+      静态目录：static
+    后台（admin）：
+      数据模型：models.py
+      表单处理：admin/forms.py
+      模版目录：templates/admin
+      静态目录：static
+      
+    
+    
