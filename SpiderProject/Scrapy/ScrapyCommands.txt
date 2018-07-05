@@ -1,0 +1,76 @@
+Scrapy工具命令分为两类，一类为全局命令，另外一类为项目命令
+
+一、全局命令
+  使用scrapy -h可以看到scrapy的全局命令
+  $ scrapy -h
+  Scrapy 1.4.0 - no active project
+
+  Usage:
+    scrapy <command> [options] [args]
+
+  Available commands:
+    bench         Run quick benchmark test
+    fetch         Fetch a URL using the Scrapy downloader
+    genspider     Generate new spider using pre-defined templates
+    runspider     Run a self-contained spider (without creating a project)
+    settings      Get settings values
+    shell         Interactive scraping console
+    startproject  Create new project
+    version       Print Scrapy version
+    view          Open URL in browser, as seen by Scrapy
+
+    [ more ]      More commands available when run from project directory
+
+  Use "scrapy <command> -h" to see more info about a command
+  ##############################################################
+  特殊情况，bench属于项目命令
+  1.fetch命令 主要用来显示爬虫爬取的过程
+  
+  2.runspider命令 使用这个命令可以实现不依托Scrapy的爬虫项目，直接运行一个爬虫文件
+  
+  3.settings命令 可以使用这个命令查看Scrapy对应的配置信息
+  
+  4.shell命令 可以启动Scrapy的交换终端
+  
+  5.startproject 不再介绍
+  
+  6.version命令 直接显示Scrapy版本相关信息
+    $ Scrapy version
+      Scrapy 1.4.0
+    $ Scrapy version -v
+        Scrapy    : 1.4.0
+        lxml      : 3.7.3.0
+        libxml2   : 2.9.4
+        cssselect : 1.0.1
+        parsel    : 1.2.0
+        w3lib     : 1.17.0
+        Twisted   : 17.1.0
+        Python    : 3.6.1 (v3.6.1:69c0db5050, Mar 21 2017, 01:21:04) - [GCC 4.2.1 (Apple Inc. build 5666) (dot 3)]
+        pyOpenSSL : 17.0.0 (OpenSSL 1.1.0f  25 May 2017)
+        Platform  : Darwin-17.5.0-x86_64-i386-64bit
+  7.views命令 可以实现下载某个网页并用浏览器查看的功能
+  
+二、项目命令
+    1.Bench命令 可以测试本地硬件的性能
+    
+    2.Genspider命令 这是一种快速创建爬虫文件的方式
+
+    3.Check命令 可以实现对某个爬虫文件进行合同检查
+    
+    4.Crawl命令 用来启动某个爬虫
+    
+    5.List命令 用来列出当前可使用的爬虫文件
+    
+    6.Edit命令 可以直接打开对应编译器对爬虫文件进行编辑
+    
+    7.Parse命令 可以实现获取指导的URL网址，并使用对应的爬虫文件进行处理和分析
+    
+    
+
+
+
+
+  
+        
+  
+  
