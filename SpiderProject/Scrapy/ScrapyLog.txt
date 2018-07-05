@@ -1,0 +1,38 @@
+$ scrapy startproject -h
+Usage
+=====
+  scrapy startproject <project_name> [project_dir]
+
+Create new project
+
+Options
+=======
+--help, -h              show this help message and exit
+
+Global Options
+--------------
+--logfile=FILE          log file. if omitted stderr will be used
+--loglevel=LEVEL, -L LEVEL
+                        log level (default: DEBUG)
+--nolog                 disable logging completely
+--profile=FILE          write python cProfile stats to FILE
+--pidfile=FILE          write process ID to FILE
+--set=NAME=VALUE, -s NAME=VALUE
+                        set/override setting (may be repeated)
+--pdb                   enable pdb on failure
+
+
+其中 
+--logfile=FILE参数主要用来指定日志文件，其中的FILE为日志文件的路径地址
+    如：指定日志文件存储在当前目录的上一层目录下，并且日志名为logf.txt,
+    可以使用命令实现：$ scrapy startproject --logfile="../logf.txt" onespider
+--loglevel=LEVEL,-L LEVEL参数主要用来控制日志信息的等级，默认为DEBUG模式，即会将对应的调试信息都输出。
+    Scrapy 提供 5 层 logging 级别：
+      CRITICAL - 严重错误(critical)
+      ERROR - 一般错误(regular errors)
+      WARNING - 警告信息(warning messages)
+      INFO - 一般信息(informational messages)
+      DEBUG - 调试信息(debugging messages) 
+   可以使用命令实现：$ scrapy startproject --loglevel=DEBUG onespider
+--nolog 参数可以控制不输出日志信息。
+  可以使用命令实现：$ scrapy startproject --nolog onespider
