@@ -15,6 +15,7 @@ Linux环境编译安装Python3.6:
      # ./configure --prefix=/usr/local/python3 --with-ssl
     编译
     # make
+    # make install
   5.建立python3的软链
     # ln -s /usr/local/python3/bin/python3 /usr/bin/python3
   6.并将/usr/local/python3/bin加入PATH
