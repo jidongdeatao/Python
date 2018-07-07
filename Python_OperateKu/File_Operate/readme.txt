@@ -175,3 +175,8 @@ with open('file','r') as f1,open('file2','w',encoding='utf8') as f2:
     if num == 5:
       line = ''.join([line.strip(),'羊小羚'])
     f2.write(line)
+
+
+慕课网相关入门视频：
+《python文件处理》 https://www.imooc.com/learn/416
+     
