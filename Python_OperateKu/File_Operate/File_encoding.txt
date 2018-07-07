@@ -16,10 +16,9 @@ Python3.X
 
 
 Python2.7文件编码：
-    python2.7默认使用ASCII编码，如果直接在py文件里面写入中文，不加入声明文件编码的注释，
-    #!/usr/bin/python
-    # -*- coding: UTF-8 -*-
-    会报错
+    python2.7默认使用ASCII解码，如果直接在py文件里面写入中文，不加入声明文件编码的注释会报错
+    在源码文件开头（一定是第一行）：# -*- coding:UTF-8 -*-，源码文件的设置解码方式是UTF-8
+    
 
     设置默认解码格式：
     import sys   #引用sys模块进来，并不是进行sys的第一次加载  
