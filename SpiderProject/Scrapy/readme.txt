@@ -36,3 +36,8 @@ Scrapy项目的目录结构：
 * onespider/pipelines.py: 爬虫项目的管道文件，主要用来对items里面定义的数据进行进一步的加工和处理。
 * onespider/settings.py: 项目的设置文件。
 * onespider/spiders/: 放置spider代码的目录。
+
+
+慕课网简单入门免费课程：
+  《Python最火爬虫框架Scrapy入门与实践》： https://www.imooc.com/learn/1017
+    以CentOS环境 爬取https://movie.douban.com/top250 进行举例
