@@ -6,6 +6,23 @@
      第三，不要忘了关闭文件。
      （为什么要关闭python文件：1）将写缓存同步到磁盘；2）Linux系统中每个进程打开的个数是有限的，如果打开个数到了系统限制，再打开文件就会失败）
 
+
+
+
+Python文件属性（常见）：
+     file.fileno():文件描述符       file.mode : 文件打开权限
+     file.encoding :文件编码        file.closed : 文件是否关闭
+     使用f=open('file名'),f.fileno 等方式查看f属性
+     f.buffer         f.fileno(        f.newlines       f.seekable(
+     f.close(         f.flush(         f.read(          f.tell(
+     f.closed         f.isatty(        f.readable(      f.truncate(
+     f.detach(        f.line_buffering f.readline(      f.writable(
+     f.encoding       f.mode           f.readlines(     f.write(
+     f.errors         f.name           f.seek(          f.writelines(
+Python标准文件：
+     文件标准输入
+
+     
 1.能调用方法的一定是对象,比如数值、字符串、列表、元组、字典，甚至文件也是对象，Python中一切皆为对象。
  str1 = 'hello'
  str2 = 'world'
