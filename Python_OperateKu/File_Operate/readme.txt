@@ -26,7 +26,12 @@ Python文件属性（常见）：
     需要将unicode转码为'utf-8'然后写入
     a=unicode.encode(u'中文','utf-8) 然后f.write(a)就没有问题
     
-    
+    使用codecs模块创建一个utf-8或者其他编码格式的文件
+    import codecs
+    f = codecs.open(fname,mode,encoding,errors,buffering)
+    如：f = codecs.open('test.txt','w','utf-8')
+          可以直接f.write(u'中文')
+          
 Python标准文件(sys模块)：
      文件标准输入：sys.stdin
      文件标准输出：sys.stdout
