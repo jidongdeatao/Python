@@ -58,6 +58,17 @@ Python2.7文件编码：
         f.write("%s\r\n"%str)
         字符串str表示的是二进制码流，f是打开的指定文件。str二进制码流按照f文件的编码方式进行解码和编码，结果保存在f文件中。
         为了安全起见，文件在打开的时候，最后指定文件编码方式
+        
+        字符串和unicode的区别
+                字符串表示的是编码后的二进制码流，unicode表示的是内码。所以，为了避免解码错误的出现，最好使用unicode表示
+                unicode的定义，使用
+                1.s=u'哈'：定义unicode字符串s。s表示的是哈的unicode内码
+                2.ss=unicode(s,'gbk'):对字符串s按照gbk方式解码，ss表示解码后的内码
+                3.import codecs
+                f=codecs.open(filename,'r','gbk‘）
+                s=f.read()
+                按照gbk方式读取filename，读取后的内容转变成unicode内码存在变量s中。
+                
       例子：读取一个文件编码格式为gbk的文件，然后输出一个utf8格式的文件
               # coding: UTF-8
               fp1 = open('test.txt', 'r')
