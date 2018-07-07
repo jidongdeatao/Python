@@ -19,6 +19,14 @@ Python文件属性（常见）：
      f.detach(        f.line_buffering f.readline(      f.writable(
      f.encoding       f.mode           f.readlines(     f.write(
      f.errors         f.name           f.seek(          f.writelines(
+     
+     
+    使用普通方式打开文件：写入u'中文'，出现的问题：
+    f = open('1.txt','r+') f.write(u'中文') 报UnicodeEncodeError
+    需要将unicode转码为'utf-8'然后写入
+    a=unicode.encode(u'中文','utf-8) 然后f.write(a)就没有问题
+    
+    
 Python标准文件(sys模块)：
      文件标准输入：sys.stdin
      文件标准输出：sys.stdout
