@@ -19,9 +19,33 @@ Python文件属性（常见）：
      f.detach(        f.line_buffering f.readline(      f.writable(
      f.encoding       f.mode           f.readlines(     f.write(
      f.errors         f.name           f.seek(          f.writelines(
-Python标准文件：
-     文件标准输入
-
+Python标准文件(sys模块)：
+     文件标准输入：sys.stdin
+     文件标准输出：sys.stdout
+     文件标准错误：sys.stderr
+     import sys
+     >>> sys.stdin.
+          sys.stdin.buffer         sys.stdin.isatty(        sys.stdin.readlines(
+          sys.stdin.close(         sys.stdin.line_buffering sys.stdin.seek(
+          sys.stdin.closed         sys.stdin.mode           sys.stdin.seekable(
+          sys.stdin.detach(        sys.stdin.name           sys.stdin.tell(
+          sys.stdin.encoding       sys.stdin.newlines       sys.stdin.truncate(
+          sys.stdin.errors         sys.stdin.read(          sys.stdin.writable(
+          sys.stdin.fileno(        sys.stdin.readable(      sys.stdin.write(
+          sys.stdin.flush(         sys.stdin.readline(      sys.stdin.writelines(
+     >>> sys.stdout.
+          sys.stdout.buffer         sys.stdout.isatty(        sys.stdout.readlines(
+          sys.stdout.close(         sys.stdout.line_buffering sys.stdout.seek(
+          sys.stdout.closed         sys.stdout.mode           sys.stdout.seekable(
+          sys.stdout.detach(        sys.stdout.name           sys.stdout.tell(
+          sys.stdout.encoding       sys.stdout.newlines       sys.stdout.truncate(
+          sys.stdout.errors         sys.stdout.read(          sys.stdout.writable(
+          sys.stdout.fileno(        sys.stdout.readable(      sys.stdout.write(
+          sys.stdout.flush(         sys.stdout.readline(      sys.stdout.writelines(
+     ########################
+     sys模块提供sys.argv属性，通过该属性得到命令行参数
+          sys.argv:字符串组成的列表
+     这个方法常用于程序输入不同的参数，根据参数，程序输出不同的结果
      
 1.能调用方法的一定是对象,比如数值、字符串、列表、元组、字典，甚至文件也是对象，Python中一切皆为对象。
  str1 = 'hello'
