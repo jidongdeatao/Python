@@ -1,0 +1,46 @@
+文件编码
+Python内部的字符串一般都是Unicode编码。代码中字符串的默认编码与代码文件本身的编码是一致的。
+所以要做一些编码转换通常是要以Unicode作为中间编码进行转换的，
+即先将其他编码的字符串解码（decode）成 Unicode，再从 Unicode编码（encode）成另一种编码。
+        decode 的作用是将其他编码的字符串转换成 Unicode 编码，eg name.decode(“GB2312”)，表示将GB2312编码的字符串name转换成Unicode编码
+        encode 的作用是将Unicode编码转换成其他编码的字符串，eg name.encode(”GB2312“)，表示将GB2312编码的字符串name转换成GB2312编码
+        所以在进行编码转换的时候必须先知道 name 是那种编码，然后 decode 成 Unicode 编码，最后再encode成需要编码的编码。
+        当然了，如果name已经就是Unicode编码了，那么就不需要进行decode进行解码转换了，直接用 encode 就可以编码成你所需要的编码。
+
+
+
+Python3.X
+  python3默认的文件编码是UTF-8
+
+
+
+
+Python2.7文件编码：
+    python2.7默认使用ASCII编码，如果直接在py文件里面写入中文，不加入声明文件编码的注释，
+    #!/usr/bin/python
+    # -*- coding: UTF-8 -*-
+    会报错
+
+    设置默认解码格式：
+    import sys   #引用sys模块进来，并不是进行sys的第一次加载  
+    reload(sys)  #重新加载sys  
+    sys.setdefaultencoding('utf8')  ##调用setdefaultencoding函数
+
+      例子：读取一个文件编码格式为gbk的文件，然后输出一个utf8格式的文件
+              # coding: UTF-8
+              fp1 = open('test.txt', 'r')
+              info1 = fp1.read()
+              # 已知是 GBK 编码，解码成 Unicode
+              tmp = info1.decode('GBK')
+
+              fp2 = open('test.txt', 'w')
+              # 编码成 UTF-8 编码的 str
+              info2 = tmp.encode('UTF-8')
+              fp2.write(info2)
+              fp2.close()
+              
+      unicode是一个内置函数，第二个参数指示源字符串的编码格式。
+        s1 = u'中文'
+        s2 = unicode('中文','gbk')
+        s3 = s1.decode('gbk')
+
