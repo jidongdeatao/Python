@@ -29,3 +29,10 @@ virtualenv管理python开发环境
           （此时就回到了正常的环境，现在pip或python均是在系统Python环境下执行。）
           完全可以针对每个应用创建独立的Python运行环境，这样就可以对每个应用的Python环境进行隔离。
           virtualenv是如何创建“独立”的Python运行环境的呢？原理很简单，就是把系统Python复制一份到virtualenv的环境，用命令source venv/bin/activate进入一个virtualenv环境时，virtualenv会修改相关环境变量，让命令python和pip均指向当前的virtualenv环境。
+          
+         需要制定python版本：
+          virtualenv -p /usr/bin/python2.7 my_project
+          或者在环境变量配置中加入
+          export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
+          
+          
