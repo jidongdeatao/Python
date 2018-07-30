@@ -1,4 +1,7 @@
 简单的爬虫小示例
+依赖Python3.X上的UrlLib库
+https://github.com/jidongdeatao/Python/tree/master/Python_OperateKu/URL_Operate/Urllib/python3.X
+
 
 #京东图片爬虫
 爬取的起始URL：https://list.jd.com/list.html?cat=9987,653,655
