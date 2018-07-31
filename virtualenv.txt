@@ -1,6 +1,7 @@
 virtualenv管理python开发环境
 
 安装：pip install virtualenv
+     (pip install virtualenvwrapper)
 
 使用方法：
 我们要开发一个新的项目，需要一套独立的Python运行环境，可以这么做：
@@ -35,4 +36,30 @@ virtualenv管理python开发环境
           或者在环境变量配置中加入
           export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2.7
           
+Linux下安装irtaulenvwrapper：
+Virtaulenvwrapper是virtualenv的扩展包，用于更方便管理虚拟环境，它可以做：
+    将所有虚拟环境整合在一个目录下
+    管理（新增，删除，复制）虚拟环境
+    快速切换虚拟环境
+安装方法
+　　1、安装 virtualenvwrapper
+pip install virtualenvwrapper
+　　2、创建目录存放虚拟环境
+mkdir ~/.virtualenvs
+　　3、在.bashrc中末尾添加
+export WORKON_HOME=~/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+　　4、运行 source ~/.bashrc
+
+命令列表：
+workon:列出虚拟环境列表
+lsvirtualenv:同上
+mkvirtualenv [envname]:新建虚拟环境
+workon [envname]:切换虚拟环境
+rmvirtualenv  [envname]:删除虚拟环境
+deactivate: 离开虚拟环境
+cpvirtualenv [sorce] [dest]　　#复制虚拟环境
+pip freeze > requirements.txt　　导出该环境下所有依赖到requirements.txt文件
+
+ 
           
