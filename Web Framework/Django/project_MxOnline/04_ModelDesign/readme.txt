@@ -45,6 +45,20 @@
     $ python manage.py startapp users
     编辑users/models.py
     
+    在MxOnline settings.py中加入users与替换用户表：
+          INSTALLED_APPS = [
+          'django.contrib.admin',
+          'django.contrib.auth',
+          'django.contrib.contenttypes',
+          'django.contrib.sessions',
+          'django.contrib.messages',
+          'django.contrib.staticfiles',
+          'users',
+      ]
+      AUTH_USER_MODEL = "users.UserProfile"
+    然后更新：
+    $ python manage.py makemigrations users
+    $ python manage.py migrate users
  三、APP courses设计
  
  四、APP organization 设计
