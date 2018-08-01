@@ -2,7 +2,7 @@
 
 需要设计4个APP，分别对应着4张数据表：
   分别是
-  1)cousers
+  1)users
   2)courses
   3)organization
   4)operation
@@ -13,6 +13,8 @@
        Django ==1.9
        MySQL
        Navicat
+       
+一、环境搭建
   1.使用virtualenv虚拟环境：
       $ mkvirtualenv -p /usr/bin/python2.7 mxonlinevenv
       $ source mxonlinevenv/bin/activate
@@ -38,6 +40,15 @@
     $ python manage.py migrate
     打开浏览器:http://127.0.0.1:8000 看下是否运行成功
     
+ 二、APP users设计
+    新建APP users：
+    $ python manage.py startapp users
+    编辑users/models.py
     
-    
+ 三、APP courses设计
+ 
+ 四、APP organization 设计
+ 
+ 五、APP operation 设计
+ 
     
