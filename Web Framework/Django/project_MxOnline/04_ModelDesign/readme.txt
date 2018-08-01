@@ -59,10 +59,50 @@
     然后更新：
     $ python manage.py makemigrations users
     $ python manage.py migrate users
+    
  三、APP courses设计
- 
+    新建APP courses：
+    $ python manage.py startapp courses
+    编辑courses/models.py
+    
  四、APP organization 设计
+    新建APP organization：
+    $ python manage.py startapp organization
+    编辑organization/models.py
  
  五、APP operation 设计
- 
+    新建APP operation：
+    $ python manage.py startapp operation
+    编辑operation/models.py
+    
+ 六、在MxOnline settings.py中加入所有APP：
+ INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'users',
+    'courses',
+    'organization',
+    'operation',
+]
+ 更新：
+    $ python manage.py makemigrations
+    $ python manage.py migrate
+ Pycharm中在project目录下新建个python package，名字为apps，然后把上面新建的4个APP拖入到其中，
+    点击apps右键，Mark Directory as source root
+ 在MxOnlie settings.py中把apps加入到python搜索目录之下，
+    import os
+    import sys #新加入
+    # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path.insert(0,os.path.join(BASE_DIR,'apps')) #新加入
+    
+    运行，看下有无报错
+    本部分结束
+    
+    
+    
     
