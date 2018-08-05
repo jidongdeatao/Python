@@ -7,3 +7,6 @@ Linux 和 MacOS 用户下载好之后, 请将下载好的”geckodriver”文件
 
 sudo cp 你的geckodriver位置 /usr/local/bin
 sudo chmod +x /usr/local/bin/geckodriver
+
+
+暂时只有火狐上有这个插件. 插件 Katalon Recorder，是可以通过录制操作过程转化为python形式
