@@ -52,3 +52,7 @@ Django自带的admin后台管理系统会自动在
  
  重点介绍xadmin 
  
+Xadmin有两种安装方式：
+  1
+Xadmin有两种安装方式：。
+Xadmin有两种安装方式：
