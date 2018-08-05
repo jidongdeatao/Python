@@ -2,3 +2,41 @@
 解析网页结构
 非常简洁的能够筛选到网页结构中的标签与元素
 同时可以与正则表达式结合使用，可以获取到网页中的任何内容
+
+官方文档：https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/#id5
+中文版的哦，赞
+
+总结一下爬网页的流程, 让你对 BeautifulSoup 有一个更好的定位.
+    选着要爬的网址 (url)
+    使用 python 登录上这个网址 (urlopen等)
+    读取网页信息 (read() 出来)
+    将读取的信息放入 BeautifulSoup
+    使用 BeautifulSoup 选取 tag 信息等 (代替正则表达式)
+
+用法演练：
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
+
+# if has Chinese, apply decode()
+html = urlopen("https://xxxx.html").read().decode('utf-8')
+print(html)
+
+#用 BeautifulSoup 来找到 body 中的段落 <p> 和所有链接 <a>
+#读取这个网页信息, 我们将要加载进 BeautifulSoup, 以 lxml 的这种形式加载. 
+#除了 lxml, 其实还有很多形式的解析器, 不过大家都推荐使用 lxml 的形式. 然后 soup 里面就有着这个 HTML 的所有信息
+soup = BeautifulSoup(html, features='lxml')
+print(soup.h1)
+print('\n', soup.p)
+
+#如果网页中有过个同样的 tag, 比如链接 <a>, 我们可以使用 find_all() 来找到所有的选项.
+#因为我们真正的 link 不是在 <a> 中间 </a>, 而是在 <a href="link"> 里面, 
+#也可以看做是 <a> 的一个属性. 我们能用像 Python 字典的形式, 用 key 来读取 l["href"]
+all_href = soup.find_all('a')
+all_href = [l['href'] for l in all_href]
+print('\n', all_href)
+
+安装：
+# Python 2+
+pip install beautifulsoup4
+# Python 3+
+pip3 install beautifulsoup4
