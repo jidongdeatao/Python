@@ -1,1 +1,52 @@
 比urllib库更好使用的库
+
+
+Mac下安装：
+    # python 2+
+    pip install requests
+    # python 3+
+    pip3 install requests
+
+requests get请求演示：
+    import requests
+    import webbrowser
+    param = {"wd": "XXX"}  # 搜索的信息
+    r = requests.get('http://www.baidu.com/s', params=param)
+    print(r.url)
+    webbrowser.open(r.url)
+
+requests post请求演示：
+    data = {'firstname': 'XX', 'lastname': 'Y'}
+    r = requests.post('http://zzz.php', data=data)
+    print(r.text)
+
+requests 上传图片：
+    file = {'uploadFile': open('./image.png', 'rb')}
+    r = requests.post('http://xxx.php', files=file)
+    print(r.text)
+    
+requests 登录：
+    #需要使用到cookie的传递
+    payload = {'username': 'Morvan', 'password': 'password'}
+    r = requests.post('http://pythonscraping.com/pages/cookies/welcome.php', data=payload)
+    print(r.cookies.get_dict())
+    # {'username': 'XXX', 'loggedin': '1'}
+    
+    r = requests.get('XXXX.php', cookies=r.cookies)
+    print(r.text)
+
+requests 使用Session进行登录：
+  #每次都要传递 cookies 是很麻烦的, 好在 requests 有个很 handy 的功能, 那就是 Session. 
+  #在一次会话中, 我们的 cookies 信息都是相连通的, 它自动帮我们传递这些 cookies 信息
+    session = requests.Session()
+    payload = {'username': 'Morvan', 'password': 'password'}
+    r = session.post('http://welcome.php', data=payload)
+    print(r.cookies.get_dict())
+    # {'username': 'xxx', 'loggedin': '1'}
+
+    r = session.get("http://xxxx.php")
+    print(r.text)
+    
+    
+    
+    
