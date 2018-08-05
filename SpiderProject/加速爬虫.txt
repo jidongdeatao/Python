@@ -100,5 +100,41 @@ print('Total time: %.1f s' % (time.time()-t1, ))    # 53 s
 
 二、异步爬虫
 
-    print('\nDistributed Parsing...')异步
-    print('\nDistributed Parsing...')
+#使用requests方式
+import requests
+
+URL = 'https://xxx/'
+
+def normal():
+    for i in range(2):
+        r = requests.get(URL)
+        url = r.url
+        print(url)
+
+t1 = time.time()
+normal()
+print("Normal total time:", time.time()-t1)
+
+#将requests方式改成异步
+import aiohttp
+
+async def job(session):
+    response = await session.get(URL)       # 等待并切换
+    return str(response.url)
+    
+async def main(loop):
+    async with aiohttp.ClientSession() as session:      # 官网推荐建立 Session 的形式
+        tasks = [loop.create_task(job(session)) for _ in range(2)]
+        finished, unfinished = await asyncio.wait(tasks)
+        all_results = [r.result() for r in finished]    # 获取所有结果
+        print(all_results)
+
+t1 = time.time()
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main(loop))
+loop.close()
+print("Async total time:", time.time() - t1)
+
+
+
+
