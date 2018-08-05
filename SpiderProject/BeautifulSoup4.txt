@@ -81,7 +81,7 @@ Mac下安装：
             print(link['src'])
             
 又或者我们发现, 我想选一些课程的链接, 而这些链接都有统一的形式, 
-就是开头都会有 https://xxx., 那我就将这个定为一个正则的规则, 让 BeautifulSoup 帮我找到符合这个规则的链接.
-        course_links = soup.find_all('a', {'href': re.compile('https://morvan.*')})
+就是开头都会有 https://zzz., 那我就将这个定为一个正则的规则, 让 BeautifulSoup 帮我找到符合这个规则的链接.
+        course_links = soup.find_all('a', {'href': re.compile('https://zzz.*')})
         for link in course_links:
             print(link['href'])
