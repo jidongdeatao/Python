@@ -14,29 +14,74 @@
     使用 BeautifulSoup 选取 tag 信息等 (代替正则表达式)
 
 用法演练：
-from bs4 import BeautifulSoup
-from urllib.request import urlopen
+        from bs4 import BeautifulSoup
+        from urllib.request import urlopen
 
-# if has Chinese, apply decode()
-html = urlopen("https://xxxx.html").read().decode('utf-8')
-print(html)
+        # if has Chinese, apply decode()
+        html = urlopen("https://xxxx.html").read().decode('utf-8')
+        print(html)
 
-#用 BeautifulSoup 来找到 body 中的段落 <p> 和所有链接 <a>
-#读取这个网页信息, 我们将要加载进 BeautifulSoup, 以 lxml 的这种形式加载. 
-#除了 lxml, 其实还有很多形式的解析器, 不过大家都推荐使用 lxml 的形式. 然后 soup 里面就有着这个 HTML 的所有信息
-soup = BeautifulSoup(html, features='lxml')
-print(soup.h1)
-print('\n', soup.p)
+        #用 BeautifulSoup 来找到 body 中的段落 <p> 和所有链接 <a>
+        #读取这个网页信息, 我们将要加载进 BeautifulSoup, 以 lxml 的这种形式加载. 
+        #除了 lxml, 其实还有很多形式的解析器, 不过大家都推荐使用 lxml 的形式. 然后 soup 里面就有着这个 HTML 的所有信息
+        soup = BeautifulSoup(html, features='lxml')
+        print(soup.h1)
+        print('\n', soup.p)
 
-#如果网页中有过个同样的 tag, 比如链接 <a>, 我们可以使用 find_all() 来找到所有的选项.
-#因为我们真正的 link 不是在 <a> 中间 </a>, 而是在 <a href="link"> 里面, 
-#也可以看做是 <a> 的一个属性. 我们能用像 Python 字典的形式, 用 key 来读取 l["href"]
-all_href = soup.find_all('a')
-all_href = [l['href'] for l in all_href]
-print('\n', all_href)
+        #如果网页中有过个同样的 tag, 比如链接 <a>, 我们可以使用 find_all() 来找到所有的选项.
+        #因为我们真正的 link 不是在 <a> 中间 </a>, 而是在 <a href="link"> 里面, 
+        #也可以看做是 <a> 的一个属性. 我们能用像 Python 字典的形式, 用 key 来读取 l["href"]
+        all_href = soup.find_all('a')
+        all_href = [l['href'] for l in all_href]
+        print('\n', all_href)
 
-安装：
-# Python 2+
-pip install beautifulsoup4
-# Python 3+
-pip3 install beautifulsoup4
+Mac下安装：
+        # Python 2+
+        pip install beautifulsoup4
+        # Python 3+
+        pip3 install beautifulsoup4
+
+
+
+按Claass匹配
+        #要找所有 class=month 的信息. 并打印出它们的 tag 内文字.
+        soup = BeautifulSoup(html, features='lxml')
+
+        # use class to narrow search
+        month = soup.find_all('li', {"class": "month"})
+        for m in month:
+            print(m.get_text())
+
+        #或者找到 class=jan 的信息. 然后在 <ul> 下面继续找 <ul> 内部的 <li> 信息. 这样一层层嵌套的信息, 非常容易找到.
+        jan = soup.find('ul', {"class": 'jan'})
+        d_jan = jan.find_all('li')              # use jan as a parent
+        for d in d_jan:
+            print(d.get_text())
+
+正则表达式+BeautifulSoup4
+        from bs4 import BeautifulSoup
+        from urllib.request import urlopen
+        import re
+
+        # if has Chinese, apply decode()
+        html = urlopen("https://xxx.html").read().decode('utf-8')
+
+如果是图片, 它们都藏在这样一个 tag 中:
+<td>
+    <img src="https://xxxyyyzzz.jpg">
+</td>
+我们可以用 soup 将这些 <img> tag 全部找出来, 但是每一个 img 的链接(src)都可能不同. 
+或者每一个图片有的可能是 jpg 有的是 png, 如果我们只想挑选 jpg 形式的图片, 
+我们就可以用这样一个正则 r'.*?\.jpg' 来选取. 把正则的 compile 形式放到 BeautifulSoup 的功能中, 就能选到符合要求的图片链接了.
+
+        soup = BeautifulSoup(html, features='lxml')
+
+        img_links = soup.find_all("img", {"src": re.compile('.*?\.jpg')})
+        for link in img_links:
+            print(link['src'])
+            
+又或者我们发现, 我想选一些课程的链接, 而这些链接都有统一的形式, 
+就是开头都会有 https://xxx., 那我就将这个定为一个正则的规则, 让 BeautifulSoup 帮我找到符合这个规则的链接.
+        course_links = soup.find_all('a', {'href': re.compile('https://morvan.*')})
+        for link in course_links:
+            print(link['href'])
