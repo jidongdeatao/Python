@@ -101,7 +101,7 @@ class BannerAdmin(object):
 
 xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
 xadmin.site.register(Banner, BannerAdmin)
-      
+-------------------------------------------------------------------------------------------------------      
 按照与users APP一样的操作方法，在courses/operation/organization中都新建adminx.py文件，并在其中添加模块代码：
   courses/adminx.py中的代码：
 
