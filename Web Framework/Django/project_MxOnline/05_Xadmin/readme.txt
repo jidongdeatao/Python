@@ -102,5 +102,126 @@ class BannerAdmin(object):
 xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
 xadmin.site.register(Banner, BannerAdmin)
       
- 
+按照与users APP一样的操作方法，在courses/operation/organization中都新建adminx.py文件，并在其中添加模块代码：
+  courses/adminx.py中的代码：
+
+# -*- coding: utf-8 -*-
+import xadmin
+
+from .models import Course, Lesson, Video, CourseResource
+
+
+class CourseAdmin(object):
+    list_display = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students']
+    search_fields = ['name', 'desc', 'detail', 'degree', 'students']
+    list_filter = ['name', 'desc', 'detail', 'degree', 'learn_times', 'students']
+
+class LessonAdmin(object):
+    list_display = ['course', 'name', 'add_time']
+    search_fields = ['course', 'name']
+    list_filter = ['course__name', 'name', 'add_time']
+
+
+class VideoAdmin(object):
+    list_display = ['lesson', 'name', 'add_time']
+    search_fields = ['lesson', 'name']
+    list_filter = ['lesson', 'name', 'add_time']
+
+class CourseResourceAdmin(object):
+    list_display = ['course', 'name', 'download', 'add_time']
+    search_fields = ['course', 'name', 'download']
+    list_filter = ['course', 'name', 'download', 'add_time']
+
+
+xadmin.site.register(Course, CourseAdmin)
+xadmin.site.register(Lesson, LessonAdmin)
+xadmin.site.register(Video, VideoAdmin)
+xadmin.site.register(CourseResource, CourseResourceAdmin)
+
+-----------------------------------------------------------------------------
+数据库中的一对多，多对多概念，在Django中都可以使用外键来实现：
+　　第一步，在models中定义外键(models.ForeignKey)
+class Lesson(models.Model):
+    course = models.ForeignKey(Course, verbose_name=u"课程")　　# 添加外键
+    name = models.CharField(max_length=100, verbose_name=u"章节名")
+    add_time = models.DateTimeField(default=datetime.now, verbose_name=u"添加时间")
+
+　　第二步，在adminx中关联外键的字段
+class LessonAdmin(object):
+    list_display = ("course", "name", "add_time")　　# list_display中不能使用course__name 会报错
+    list_filter = ("course__name", "name", "add_time")   # 这里引用了外键course表的name字段
+    search_fields = ("course__name", "name")　　# 这里引用了外键course表的name字段
+
+其中章节与课程有外键关联关系，在添加章节时显示不出课程名，需要在course/models.py中Course方法下面加入：
+    def __unicode__(self):
+        return self.name
+----------------------------------------------------------------------------------------------
+  organization/adminx.py中的代码：
+# -*- coding: utf-8 -*-
+import xadmin
+
+from .models import CityDict, CourseOrg, Teacher
+
+class CityDictAdmin(object):
+    list_display = ['name', 'desc', 'add_time']
+    search_fields = ['name', 'desc']
+    list_filter = ['name', 'desc', 'add_time']
+
+class CourseOrgAdmin(object):
+    list_display = ['name', 'desc', 'click_nums', 'fav_nums']
+    search_fields = ['name', 'desc', 'click_nums', 'fav_nums']
+    list_filter = ['name', 'desc', 'click_nums', 'fav_nums']
+
+class TeacherAdmin(object):
+    list_display = ['org', 'name', 'work_years', 'work_company']
+    search_fields = ['org', 'name', 'work_years', 'work_company']
+    list_filter = ['org', 'name', 'work_years', 'work_company']
+
+xadmin.site.register(CityDict, CityDictAdmin)
+xadmin.site.register(CourseOrg, CourseOrgAdmin)
+xadmin.site.register(Teacher, TeacherAdmin)
+
+____________________________________________________________________________
+        operation/adminx.py中的代码：
+# -*- coding: utf-8 -*-
+import xadmin
+
+from .models import UserAsk, UserCourse, UserMessage, CourseComments, UserFavorite
+
+class UserAskAdmin(object):
+    list_display = ['name', 'mobile', 'course_name', 'add_time']
+    search_fields = ['name', 'mobile', 'course_name']
+    list_filter = ['name', 'mobile', 'course_name', 'add_time']
+
+class UserCourseAdmin(object):
+    list_display = ['user', 'course', 'add_time']
+    search_fields = ['user', 'course']
+    list_filter = ['user', 'course', 'add_time']
+
+class UserMessageAdmin(object):
+    list_display = ['user', 'message', 'has_read', 'add_time']
+    search_fields = ['user', 'message', 'has_read']
+    list_filter = ['user', 'message', 'has_read', 'add_time']
+
+class CourseCommentsAdmin(object):
+    list_display = ['user', 'course', 'comments', 'add_time']
+    search_fields = ['user', 'course', 'comments']
+    list_filter = ['user', 'course', 'comments', 'add_time']
+
+class UserFavoriteAdmin(object):
+    list_display = ['user', 'fav_id', 'fav_type', 'add_time']
+    search_fields = ['user', 'fav_id', 'fav_type']
+    list_filter = ['user', 'fav_id', 'fav_type', 'add_time']
+
+
+xadmin.site.register(UserAsk, UserAskAdmin)
+xadmin.site.register(UserCourse, UserCourseAdmin)
+xadmin.site.register(UserMessage, UserMessageAdmin)
+xadmin.site.register(CourseComments, CourseCommentsAdmin)
+xadmin.site.register(UserFavorite, UserFavoriteAdmin)
+
+
+
+
+
       
