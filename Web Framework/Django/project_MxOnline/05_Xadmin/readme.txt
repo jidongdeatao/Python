@@ -221,7 +221,42 @@ xadmin.site.register(CourseComments, CourseCommentsAdmin)
 xadmin.site.register(UserFavorite, UserFavoriteAdmin)
 
 
+-------------------------------------------------------------------------------
+xadmin主题
+可以放在一个APP中，这里放在了Users App中
+在users app的adminx.py中添加以下代码
+
+from xadmin import views
+
+class BaseSetting(object):
+    enable_themes = True　　# 启动主题
+    use_bootswatch = True  # 启动主题样板
+
+xadmin.site.register(views.BaseAdminView, BaseSetting)　　# 注册
+
+全局配置：
+定义 GlobalSettings类
+
+class GlobalSettings(object):
+    site_title = "教学在线后台管理系统" #页头
+    site_footer = "教学在线网" #页脚
+    menu_style = "accordion" #菜单样式 
 
 
+xadmin.site.register(views.CommAdminView, GlobalSettings)
+
+
+修改菜单显示为中文：pip 安装的xadmin有bug，这一步不会生效
+
+每个app下的apps.py中添加 verbose_name
+
+class OperationConfig(AppConfig):
+    name = 'apps.operation'
+    verbose_name = u"用户操作"
+
+init文件中添加 default_app_config = "operation.apps.OperationConfig"
+
+
+ 
 
       
