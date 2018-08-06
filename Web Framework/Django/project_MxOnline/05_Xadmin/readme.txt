@@ -53,6 +53,34 @@ Django自带的admin后台管理系统会自动在
  重点介绍xadmin 
  
 Xadmin有两种安装方式：
-  1
-Xadmin有两种安装方式：。
-Xadmin有两种安装方式：
+  1.使用pip安装
+    安装完之后，
+    在settings.py将xadmin的两个名称
+    'xadmin',
+    'crispy_forms',
+    添加进来
+    在urls.py中
+    import xadmin
+    urlpatterns = [
+        url(r'^xadmin/', xadmin.site.urls),
+      ]
+   同时需要删除掉之前使用users/admin.py注册到后台的模块
+   然后将xadmin的表同步到数据库
+   python manage.py makemigrations xadmin
+   python manage.py migrate xadmin
+   
+   启动，在浏览器中输入127.0.0.1:8000/xadmin就进入了后台
+  2.使用源码进行安装
+      github上下载 然后对源码配置到项目中
+      github地址：https://github.com/sshwsfc/xadmin
+      下载后解压缩，新建与apps平级目录extra_apps,将文件夹中的xadmin目录拖到这个目录下
+      这个extra_apps需要Mark为根目录，同时在settings.py中设置下
+      BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+      sys.path.insert(0,os.path.join(BASE_DIR,'apps'))
+      sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))#新加入的位置
+      不过也需要xadmin的依赖包django-crispy-forms
+      与pip 安装xadmin一样配置一下
+      
+      
+ 
+      
