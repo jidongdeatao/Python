@@ -80,7 +80,27 @@ Xadmin有两种安装方式：
       sys.path.insert(0,os.path.join(BASE_DIR,'extra_apps'))#新加入的位置
       不过也需要xadmin的依赖包django-crispy-forms
       与pip 安装xadmin一样配置一下
-      
+    图文教程参考：http://www.cnblogs.com/vincenshen/articles/6477069.html
+    
+ 在Xadmin中配置APP功能模块：需要在APP中新建个adminx.py文件，xadmin会自动搜索该文件
+  users/adminx.py 中的功能：
+# -*- coding:utf-8 -*-
+import xadmin
+from .models import EmailVerifyRecord, Banner
+
+
+class EmailVerifyRecordAdmin(object):
+    list_display = ("code", "email", "send_type", "send_time")
+    search_fields = ("code", "email", "send_type")
+    list_filter = ("code", "email", "send_type", "send_time")
+
+class BannerAdmin(object):
+    list_display = ("title", "image", "url", "index", "add_time")
+    search_fields = ("title", "image", "url", "index")
+    list_filter = ("title", "image", "url", "index", "add_time")
+
+xadmin.site.register(EmailVerifyRecord, EmailVerifyRecordAdmin)
+xadmin.site.register(Banner, BannerAdmin)
       
  
       
