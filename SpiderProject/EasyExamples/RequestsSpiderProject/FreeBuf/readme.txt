@@ -5,6 +5,7 @@ FreeBuf
 
 首先选取的是专栏作家
 这里涉及几个接口
+    1.
     http://zhuanlan.freebuf.com/column/columHome/?name=%E5%88%A9%E5%99%A8%E7%99%BE%E5%AE%9D%E7%AE%B1
       这里name 后面跟的是作者的中文名称
       请求后返回的json字段有以下几部分
@@ -18,6 +19,7 @@ FreeBuf
         attenMount	10233
         allType	[…]
         」
+    2.
     http://zhuanlan.freebuf.com/column/articleSelectHome/?name=%E5%88%A9%E5%99%A8%E7%99%BE%E5%AE%9D%E7%AE%B1
     http://zhuanlan.freebuf.com/column/articleSelectHome/?page=3&name=%E5%88%A9%E5%99%A8%E7%99%BE%E5%AE%9D%E7%AE%B1
     这两个URL为同一个接口，对于分页的话在page处发生变更
@@ -45,6 +47,7 @@ FreeBuf
         从这个返回值就可以提取出想要的信息
         
         现在还差一个可以遍历所有专栏作家的URL接口
+        3.
         http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=1&search=
         http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=3&search=
         通过
