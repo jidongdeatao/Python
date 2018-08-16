@@ -65,3 +65,16 @@ FreeBuf
             attenflag	"关注"
             】
            
+SQL语句：
+DROP TABLE IF EXISTS `zhuanlan`;
+CREATE TABLE `zhuanlan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `mid` int(20) unsigned NOT NULL,
+  `columName` varchar(45) NOT NULL,
+  `imgUrl` varchar(100) NOT NULL,
+  `url` varchar(45) NOT NULL,
+  `intro` varchar(200) NOT NULL,
+  `attenMount` int(10) NOT NULL,
+  `artiMount` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
