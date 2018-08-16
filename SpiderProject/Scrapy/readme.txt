@@ -17,7 +17,8 @@ Scrapy的基本用法包括下面几个步骤：
 
 Scrapy项目的目录结构：
   创建一个爬虫项目名称叫onespider
-  使用命令：scrapy startproject onespider 创建Scrapy项目：
+    使用命令：
+    scrapy startproject onespider 创建Scrapy项目：
   目录结构为：
   onespider
   |-scrapy.cfg
@@ -41,3 +42,6 @@ Scrapy项目的目录结构：
 慕课网简单入门免费课程：
   《Python最火爬虫框架Scrapy入门与实践》： https://www.imooc.com/learn/1017
     以CentOS环境 爬取https://movie.douban.com/top250 进行举例
+
+
+开源的Scrapy爬虫项目：
