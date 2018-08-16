@@ -50,5 +50,6 @@ FreeBuf
         3.
         http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=1&search=
         http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=3&search=
-        通过
+        通过对比可以发现first后的参数发生变化，返回值也发生变化
+        请求返回
            
