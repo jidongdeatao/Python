@@ -51,5 +51,17 @@ FreeBuf
         http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=1&search=
         http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=3&search=
         通过对比可以发现first后的参数发生变化，返回值也发生变化
-        请求返回
+        请求后返回的json格式为：
+        status	200
+        data    【	
+            0	
+            id	"106"
+            columName	"潜心学习的小白帽"
+            imgUrl	"http://image.3001.net/images/20170920/15058369361454.jpg!video"
+            url	"/column/index/?name=潜心学习的小白帽"
+            intro	"漏洞复现，代码审计，工具介绍，CTF总结。"
+            attenMount	"9646"
+            artiMount	"76"
+            attenflag	"关注"
+            】
            
