@@ -45,5 +45,7 @@ FreeBuf
         从这个返回值就可以提取出想要的信息
         
         现在还差一个可以遍历所有专栏作家的URL接口
-        
+        http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=1&search=
+        http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=3&search=
+        通过
            
