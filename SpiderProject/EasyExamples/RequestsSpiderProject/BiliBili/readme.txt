@@ -80,5 +80,5 @@ UNLOCK TABLES;
   
  这个主要是分析了这个爬虫，没有多大难度， 
 https://github.com/airingursb/bilibili-user  
-  
+ bilibili-users-info.py 需要使用到USE-AGENT头文件（避免被反爬虫到），已放到项目中。
   
