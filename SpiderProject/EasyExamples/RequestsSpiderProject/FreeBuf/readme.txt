@@ -5,20 +5,22 @@ FreeBuf
 
 首先选取的是专栏作家
 这里涉及几个接口
-    1.
-    http://zhuanlan.freebuf.com/column/columHome/?name=%E5%88%A9%E5%99%A8%E7%99%BE%E5%AE%9D%E7%AE%B1
-      这里name 后面跟的是作者的中文名称
-      请求后返回的json字段有以下几部分
-      status
-      data「
-        id	69
-        name	利器百宝箱
-        imgUrl	http://image.3001.net/images/20170727/15011492194688.jpg!video
-        intro	hacker的安全利器
-        attenflag	关注
-        attenMount	10233
-        allType	[…]
-        」
+    3.
+        http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=1&search=
+        这个接口为get请求，请求多次后会返回数据库不同的专栏信息
+        请求后返回的json格式为：
+        status	200
+        data    【	
+            0	
+            id	"106"
+            columName	"潜心学习的小白帽"
+            imgUrl	"http://image.3001.net/images/20170920/15058369361454.jpg!video"
+            url	"/column/index/?name=潜心学习的小白帽"
+            intro	"漏洞复现，代码审计，工具介绍，CTF总结。"
+            attenMount	"9646"
+            artiMount	"76"
+            attenflag	"关注"
+            】
     2.
     http://zhuanlan.freebuf.com/column/articleSelectHome/?name=%E5%88%A9%E5%99%A8%E7%99%BE%E5%AE%9D%E7%AE%B1
     http://zhuanlan.freebuf.com/column/articleSelectHome/?page=3&name=%E5%88%A9%E5%99%A8%E7%99%BE%E5%AE%9D%E7%AE%B1
@@ -47,25 +49,11 @@ FreeBuf
         从这个返回值就可以提取出想要的信息
         
         现在还差一个可以遍历所有专栏作家的URL接口
-        3.
-        http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=1&search=
-        http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=3&search=
-        通过对比可以发现first后的参数发生变化，返回值也发生变化
-        请求后返回的json格式为：
-        status	200
-        data    【	
-            0	
-            id	"106"
-            columName	"潜心学习的小白帽"
-            imgUrl	"http://image.3001.net/images/20170920/15058369361454.jpg!video"
-            url	"/column/index/?name=潜心学习的小白帽"
-            intro	"漏洞复现，代码审计，工具介绍，CTF总结。"
-            attenMount	"9646"
-            artiMount	"76"
-            attenflag	"关注"
-            】
+        
            
 SQL语句：
+zhuanlan表需要使用的语句：
+
 DROP TABLE IF EXISTS `zhuanlan`;
 CREATE TABLE `zhuanlan` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -76,5 +64,25 @@ CREATE TABLE `zhuanlan` (
   `intro` varchar(200) NOT NULL,
   `attenMount` int(10) NOT NULL,
   `artiMount` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+content表需要使用到的语句：
+
+DROP TABLE IF EXISTS `content`;
+CREATE TABLE `content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `page_id` varchar(10)  NOT NULL,
+  `title` varchar(100) NOT NULL,
+	`page_url` varchar(100) NOT NULL,
+  `imgUrl` varchar(200) NOT NULL,
+	`contents` varchar(200) NOT NULL,
+	`author` varchar(50) NOT NULL,
+  `authorImg` varchar(200) NOT NULL,
+	`authorUrl` varchar(200) NOT NULL,
+  `deploytime` varchar(50) NOT NULL,
+	`comMount` varchar(10) NOT NULL,
+  `readCount` varchar(10) NOT NULL,
+	`money` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
