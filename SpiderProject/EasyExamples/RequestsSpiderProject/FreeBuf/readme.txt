@@ -5,7 +5,7 @@ FreeBuf
 
 首先选取的是专栏作家
 这里涉及几个接口
-    3.
+    1.
         http://zhuanlan.freebuf.com/index/columRec/?tag=0&first=1&search=
         这个接口为get请求，请求多次后会返回数据库不同的专栏信息
         请求后返回的json格式为：
