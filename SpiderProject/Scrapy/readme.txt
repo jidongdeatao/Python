@@ -38,6 +38,9 @@ Scrapy项目的目录结构：
 * onespider/settings.py: 项目的设置文件。
 * onespider/spiders/: 放置spider代码的目录。
 
+  使用命令来创建一个网站的爬虫：
+    cd onespider
+    scrapy genspider example example.com
 
 慕课网简单入门免费课程：
   《Python最火爬虫框架Scrapy入门与实践》： https://www.imooc.com/learn/1017
