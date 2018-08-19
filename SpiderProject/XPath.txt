@@ -27,7 +27,7 @@ article//div 	选取所有属于article元素的后代的div元素，不管它�
 
 xpath语法-谓语:
 表达式 	说明
-/article/div[1 	选取属于article子元素的第一个div元素
+/article/div[1] 	选取属于article子元素的第一个div元素
 /article/div[last()] 	选取属于article子元素的最后一个div元素
 /article/div[last()-1] 	选取属于article子元素的倒数第二个div元素
 //div[@color] 	选取所有拥有color属性的div元素
