@@ -1,2 +1,45 @@
 XPath是XML的路径语音，利用该语音快速地在XML文档中查找对呀的信息，也可以快速的对网页进行定位。
 XPath表达式用于筛选信息。
+
+为什么要使用xpath？
+
+    xpath使用路径表达式在xml和html中进行导航
+    xpath包含有一个标准函数库
+    xpath是一个w3c的标准
+    xpath速度要远远超beautifulsoup。
+
+xpath节点关系
+
+    父节点*上一层节点*
+    子节点
+    兄弟节点*同胞节点*
+    先辈节点*父节点，爷爷节点*
+    后代节点*儿子，孙子*
+    xpath语法:
+
+表达式 	说明
+article 	选取所有article元素的所有子节点
+/article 	选取根元素article
+article/a 	选取所有属于article的子元素的a元素
+//div 	选取所有div元素（不管出现在文档里的任何地方）
+article//div 	选取所有属于article元素的后代的div元素，不管它出现在article之下的任何位置
+//@class 	选取所有名为class的属性
+
+xpath语法-谓语:
+表达式 	说明
+/article/div[1 	选取属于article子元素的第一个div元素
+/article/div[last()] 	选取属于article子元素的最后一个div元素
+/article/div[last()-1] 	选取属于article子元素的倒数第二个div元素
+//div[@color] 	选取所有拥有color属性的div元素
+//div[@color='red'] 	选取所有color属性值为red的div元素
+
+xpath语法:
+表达式 	说明
+/div/* 	选取属于div元素的所有子节点
+//* 	选取所有元素
+//div[@*] 	选取所有带属性的div 元素
+//div/a 丨//div/p 	选取所有div元素的a和p元素
+//span丨//ul 	选取文档中的span和ul元素
+article/div/p丨//span 	选取所有属于article元素的div元素的p元素以及文档中所有的 span元素
+
+xpath抓取误区
