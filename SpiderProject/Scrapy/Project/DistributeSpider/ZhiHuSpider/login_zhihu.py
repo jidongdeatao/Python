@@ -9,10 +9,6 @@ except:
     import http.cookiejar as cookielib
 import re
 
-__author__ = 'mtianyan'
-__date__ = '2017/5/23 16:42'
-
-
 import requests
 try:
     import cookielib
