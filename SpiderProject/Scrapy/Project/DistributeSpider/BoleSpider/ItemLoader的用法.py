@@ -6,9 +6,17 @@
 # 这种用法是用来简化response.xpath与response.css方法
 
 from scrapy.loader import ItemLoader
-# 通过item loader加载item
+from ArticleSpider.items import ArticleItemLoader #引入自定义的ItemLoader
+def parse_details(self, response):
+        #实例化
+        article_item = JobBoleArticleItem()
+
         front_image_url = response.meta.get("front_image_url", "")  # 文章封面图
-        item_loader = ItemLoader(item=JobBoleArticleItem(), response=response)
+
+        # 通过item loader加载item
+        item_loader = ArticleItemLoader(item=JobBoleArticleItem(), response=response)
+
+        # 通过css选择器将后面的指定规则进行解析。
         item_loader.add_css("title", ".entry-header h1::text")
         item_loader.add_value("url", response.url)
         item_loader.add_value("url_object_id", get_md5(response.url))
@@ -19,8 +27,12 @@ from scrapy.loader import ItemLoader
         item_loader.add_css("fav_nums", ".bookmark-btn::text")
         item_loader.add_css("tags", "p.entry-meta-hide-on-mobile a::text")
         item_loader.add_css("content", "div.entry")
-        #调用这个方法来对规则进行解析生成item对象
+
+        # 调用这个方法来对规则进行解析生成item对象
         article_item = item_loader.load_item()
+
+        # 已经填充好了值调用yield传输至pipeline
+        yield article_item
         
 #  上面那个方法是用来替换下面的语句：
     def parse_details(self, response):
