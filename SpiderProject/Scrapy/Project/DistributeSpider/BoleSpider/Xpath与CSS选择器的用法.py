@@ -34,6 +34,7 @@ def parse_details(self, response):
             create_date = datetime.datetime.strptime(create_date, "%Y/%m/%d").date()
         except Exception as e:
             create_date = datetime.datetime.now().date()
+        article_item["create_date"] = create_date
         article_item['tags'] = tags
         article_item['content'] = content
         article_item['praise_nums'] = praise_nums
