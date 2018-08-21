@@ -90,5 +90,6 @@ class JobBoleArticleItem(scrapy.Item):
     fav_nums = scrapy.Field()
     content = scrapy.Field()
     tags = scrapy.Field()
+    这种方法有了改进，增加了更多的形式，详见item.py文件中处理item process.py
      
      
