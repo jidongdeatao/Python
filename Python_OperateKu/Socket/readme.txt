@@ -1,0 +1,2 @@
+Python网络编程：Socket库
+Python的Socket模块可以用来编写客户端、服务端，以及一个TCP代理，之后可以完善成我们自己的netcat
