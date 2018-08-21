@@ -38,6 +38,7 @@ ITEM_PIPELINES = {
 
 import MySQLdb
 import MySQLdb.cursors
+from twisted.enterprise import adbapi
 # 异步操作mysql插入
 class MysqlTwistedPipeline(object):
     def __init__(self, dbpool):
