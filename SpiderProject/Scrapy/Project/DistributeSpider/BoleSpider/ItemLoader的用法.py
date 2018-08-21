@@ -66,3 +66,18 @@ from scrapy.loader import ItemLoader
         article_item['comment_nums'] = comment_nums
 
         yield article_item
+
+        
+        
+#  如果在item.py文件中自定义了ItemLoader
+# 自定义itemloader实现默认取第一个值
+class ArticleItemLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+# 那么在spider爬虫文件中使用的话需要引入
+from ArticleSpider.items import ArticleItemLoader
+
+
+
+
+
+
