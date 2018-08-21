@@ -1,35 +1,32 @@
 
-如果解析页面parse_detail函数中有逻辑语句，或者想对爬取到的语句添加或做处理，
-那么就需要用到这部分内容
-在item.py文件中定义：
+# 如果解析页面parse_detail函数中有逻辑语句，或者想对爬取到的语句添加或做处理，
+# 那么就需要用到这部分内容
+# 在item.py文件中定义：
 
 MapCompose可以传入函数对于该字段进行处理，而且可以传入多个
 
 from scrapy.loader.processors import MapCompose
-def add_mtianyan(value):
-    return value+"-mtianyan"
+def add_mtian(value):
+    return value+"feichanghao"
 
  title = scrapy.Field(
-        input_processor=MapCompose(lambda x:x+"mtianyan",add_mtianyan),
+        input_processor=MapCompose(lambda x:x+"nihao",add_mtian),
     )
 
 注意：此处的自定义方法一定要写在代码前面。
-
-
-
+------------------------------------------
 create_date = scrapy.Field(
     input_processor=MapCompose(date_convert),
     output_processor=TakeFirst()
 )
-
-只取list中的第一个值。
-
+只取list中的第一个值：TakeFirst（）
+-----------------------------------------
 自定义itemloader实现默认提取第一个
 class ArticleItemLoader(ItemLoader):
     #自定义itemloader实现默认提取第一个
     default_output_processor = TakeFirst()
 
-
+#在实际中的应用
 
 import scrapy
 import datetime,re
@@ -43,6 +40,14 @@ def date_convert(value):
     except Exception as e:
         create_date = datetime.datetime.now().date()
     return create_date
+#上面这个方法是为了将爬取页面元素中的方法挪到items.py文件中
+#  # 为实例化后的对象填充值
+#     try:
+#         create_date = datetime.datetime.strptime(create_date, "%Y/%m/%d").date()
+#     except Exception as e:
+#         create_date = datetime.datetime.now().date()
+#     article_item["create_date"] = create_date
+
 # 获取字符串内数字方法
 def get_nums(value):
     match_re = re.match(".*?(\d+).*", value)
@@ -60,8 +65,6 @@ def remove_comment_tags(value):
 # 直接获取值方法
 def return_value(value):
     return value
-
-
 
 
 class ArticlespiderItem(scrapy.Item):
