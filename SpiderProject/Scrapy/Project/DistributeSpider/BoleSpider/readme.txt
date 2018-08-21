@@ -38,8 +38,30 @@ Scrapy爬取伯乐在线
         #实例化
         article_item = JobBoleArticleItem()
 
-        #Xpath的用法
-        #
+        front_image_url = response.meta.get("front_image_url", "")  # 文章封面图
+
+        # 通过item loader加载item
+        item_loader = ArticleItemLoader(item=JobBoleArticleItem(), response=response)
+
+        # 通过css选择器将后面的指定规则进行解析。
+        item_loader.add_css("title", ".entry-header h1::text")
+        item_loader.add_value("url", response.url)
+        item_loader.add_value("url_object_id", get_md5(response.url))
+        item_loader.add_css("create_date", "p.entry-meta-hide-on-mobile::text")
+        item_loader.add_value("front_image_url", [front_image_url])
+        item_loader.add_css("praise_nums", ".vote-post-up h10::text")
+        item_loader.add_css("comment_nums", "a[href='#article-comment'] span::text")
+        item_loader.add_css("fav_nums", ".bookmark-btn::text")
+        item_loader.add_css("tags", "p.entry-meta-hide-on-mobile a::text")
+        item_loader.add_css("content", "div.entry")
+
+        # 调用这个方法来对规则进行解析生成item对象
+        article_item = item_loader.load_item()
+
+        # 已经填充好了值调用yield传输至pipeline
+        yield article_item
+        
+        #这里使用了scrapy提供的最简便的itemLoader用法，其他如Xpath用法、CSS选择器用法，见Xpath与CSS选择器用法
     
 在items.py文件中元素要与jobbole.py文件中parse_details函数中定义的元素一致
 class JobBoleArticleItem(scrapy.Item):
@@ -55,5 +77,12 @@ class JobBoleArticleItem(scrapy.Item):
     content = scrapy.Field()
     tags = scrapy.Field()
     这种方法有了改进，增加了更多的形式，详见item.py文件中处理item process.py
+    
+ 
+ 在pipeline.py文件中定义数据存储到数据库、或保存到本地的方法：
+ 
+ 
+ 别忘了在settings.py文件中加入相关配置。
+ 
      
      
