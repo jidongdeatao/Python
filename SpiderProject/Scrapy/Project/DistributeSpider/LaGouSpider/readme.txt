@@ -23,3 +23,5 @@ Available templates:
     response.css进行调试
     需要注意 网站做了限制爬虫，所以需要加上user-agent
     scrapy shell -s USER_AGENT="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36" url
+
+5.确定开始爬取的start_url与回调函数
