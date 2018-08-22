@@ -20,5 +20,6 @@ Available templates:
 
 4.从要爬取的详细页面中提取共同元素到parse_detail函数中，并且使用itemLoad方法
     这里可以使用scrapy shell url
-    response.css
-    进行调试
+    response.css进行调试
+    需要注意 网站做了限制爬虫，所以需要加上user-agent
+    scrapy shell -s USER_AGENT="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36" url
