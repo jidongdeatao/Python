@@ -1,6 +1,25 @@
 首先创建：
 1.scrapy genspider zhihu www.zhihu.com
 
+2.使用账号登录知乎，观察页面元素，并分析要提取哪些元素
+  这里设计了两张表问题与答案
+
+3.在items.py文件中添加与表对应的item
+
+4.去页面中获取对应元素属性使用item_load方式加入进spider目录下爬虫文件的parse_detail函数中
+
+
+
+
+
+
+
+
+
+
+
+
+
 2.配置spider中的zhihu.py
 ##################################################################
   login_zhihu.py这个在新版本知乎上已经不可用，现在登录是通过selenium来完成
