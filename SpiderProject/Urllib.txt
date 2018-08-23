@@ -1,4 +1,0 @@
-python3当中的urllib库，是python3默认自带的库，不需要安装
-
-
-这个库与python2中的urllib有所不同
