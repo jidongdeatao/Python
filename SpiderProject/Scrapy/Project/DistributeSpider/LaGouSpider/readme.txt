@@ -6,16 +6,16 @@ Available templates:
   crawl
   csvfeed
   xmlfeed
-默认使用basic模版，这次选取crawl 这个模版
+默认使用basic模版，这次选取crawl 这个模版有rules规则，可以快速的设置要爬取的哪些URL
 
 中间有任何需要调试的地方都可以debug main.py
-# _*_ coding: utf-8 _*_
+      # _*_ coding: utf-8 _*_
 
-from scrapy.cmdline import execute
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-execute(["scrapy","crawl","lagou"])
+      from scrapy.cmdline import execute
+      import sys
+      import os
+      sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+      execute(["scrapy","crawl","lagou"])
 
 1.使用命令
   scrapy genspider -t crawl lagou www.lagou.com
@@ -74,46 +74,38 @@ execute(["scrapy","crawl","lagou"])
         job_city = scrapy.Field(
             input_processor = MapCompose(remove_splash)
         )
+        
+        
 6.在pipelines.py中定义了保存数据库的模版，
   class MysqlTwistedPipeline(object):
     def __init__(self, dbpool):
         self.dbpool = dbpool
-
-    @classmethod
-    # 自定义组件或扩展很有用的方法: 这个方法名字固定, 是会被scrapy调用的。
-    # 这里传入的cls是指当前的MysqlTwistedPipline class
-    def from_settings(cls, settings):
-        # setting值可以当做字典来取值
-        dbparms = dict(
-            host=settings["MYSQL_HOST"],
-            db=settings["MYSQL_DBNAME"],
-            user=settings["MYSQL_USER"],
-            passwd=settings["MYSQL_PASSWORD"],
-            charset='utf8',
-            cursorclass=MySQLdb.cursors.DictCursor,
-            use_unicode=True,
-        )
-        # 连接池ConnectionPool
-        # def __init__(self, dbapiName, *connargs, **connkw):
-        dbpool = adbapi.ConnectionPool("MySQLdb", **dbparms)
-
-        # 此处相当于实例化pipeline, 要在init中接收。
-        return cls(dbpool)
-
-    def process_item(self, item, spider):
-        # 使用twisted将mysql插入变成异步执行：参数1：我们自定义一个函数,里面可以写我们的插入逻辑
-        query = self.dbpool.runInteraction(self.do_insert, item)
-        # 添加自己的处理异常的函数
-        query.addErrback(self.handle_error, item, spider)
-
+    ......
     def do_insert(self, cursor, item):
         # 执行具体的插入
         # 根据不同的item 构建不同的sql语句并插入到mysql中
         insert_sql, params = item.get_insert_sql()
         cursor.execute(insert_sql, params)
+        
+        
+7.在items.py文件中的LagouJobItem()对象下加入与数据库建立连接并执行的语句：
+     def get_insert_sql(self):
+        insert_sql = """
+            insert into lagou_job(title, url, url_object_id, salary, job_city, work_years, degree_need,
+            job_type, publish_time, job_advantage, job_describe, job_addr, company_name, company_url,
+            tags, crawl_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE salary=VALUES(salary), job_describe=VALUES(job_describe)
+        """
+        params = (
+            self["title"], self["url"], self["url_object_id"], self["salary"], self["job_city"],
+            self["work_years"], self["degree_need"], self["job_type"],
+            self["publish_time"], self["job_advantage"], self["job_describe"],
+            self["job_addr"], self["company_name"], self["company_url"],
+            self["tags"], self["crawl_time"].strftime(SQL_DATETIME_FORMAT),
+        )
 
-    def handle_error(self, failure, item, spider):
-        # 处理异步插入的异常
-        print (failure)
+        return insert_sql, params
+        
+        
         
         
