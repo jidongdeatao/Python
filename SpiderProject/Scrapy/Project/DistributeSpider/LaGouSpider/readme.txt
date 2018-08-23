@@ -60,8 +60,9 @@ Available templates:
           #去掉工作城市的斜线
           return value.replace("/","")
 
-      def handle_jobaddr(value):
-          addr_list = value.split("\n")
-          addr_list = [item.strip() for item in addr_list if item.strip()!="查看地图"]
-          return "".join(addr_list)
+    然后在对象中引用：
+    class LagouJobItem(scrapy.Item):
+        job_city = scrapy.Field(
+            input_processor = MapCompose(remove_splash)
+        )
   
