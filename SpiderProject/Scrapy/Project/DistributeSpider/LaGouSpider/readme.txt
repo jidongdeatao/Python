@@ -56,5 +56,12 @@ Available templates:
   
 
 5.由于元素有部分数据需要进一步处理，这里需要在items.py文件的LagouJobItem对象前加入处理函数：
-      
+      def remove_splash(value):
+          #去掉工作城市的斜线
+          return value.replace("/","")
+
+      def handle_jobaddr(value):
+          addr_list = value.split("\n")
+          addr_list = [item.strip() for item in addr_list if item.strip()!="查看地图"]
+          return "".join(addr_list)
   
