@@ -8,6 +8,15 @@ Available templates:
   xmlfeed
 默认使用basic模版，这次选取crawl 这个模版
 
+中间有任何需要调试的地方都可以debug main.py
+# _*_ coding: utf-8 _*_
+
+from scrapy.cmdline import execute
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+execute(["scrapy","crawl","lagou"])
+
 1.使用命令
   scrapy genspider -t crawl lagou www.lagou.com
   创建lagou模版
