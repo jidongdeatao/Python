@@ -8,7 +8,7 @@
 
 4.去页面中获取对应元素属性使用item_load方式加入进spider目录下爬虫文件的parse_detail函数中
 
-
+s
 
 
 
