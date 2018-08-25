@@ -1,4 +1,4 @@
-#多种认证方式
+#多种根据获取url的途径设置的代理方式
 #copy from https://github.com/Python3WebSpider/ProxySettings/
 #1
 #urllib_socks.py
