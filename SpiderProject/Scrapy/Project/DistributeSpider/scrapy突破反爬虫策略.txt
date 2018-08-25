@@ -2,3 +2,40 @@
 策略：
 1.随机更换User-agent用户代理
 2.创建ip代理池
+
+
+1.目前需要采取的办法
+取消settings.py文件中的DOWNLOADER_MIDDLEWARES的注释状态
+DOWNLOADER_MIDDLEWARES = {
+   'ArticleSpider.middlewares.MyCustomDownloaderMiddleware': 543,
+}
+配置默认useagent为none
+DOWNLOADER_MIDDLEWARES = {
+   'ArticleSpider.middlewares.MyCustomDownloaderMiddleware': 543,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None
+}
+
+使用fakeuseragent
+pip install fake-useragent
+
+setting.py文件中设置随机模式RANDOM_UA_TYPE = "random"
+
+在middlewares.py文件中添加方法：
+from fake_useragent import UserAgent
+
+class RandomUserAgentMiddlware(object):
+    #随机更换user-agent
+    def __init__(self, crawler):
+        super(RandomUserAgentMiddlware, self).__init__()
+        self.ua = UserAgent()
+        self.ua_type = crawler.settings.get("RANDOM_UA_TYPE", "random")
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(crawler)
+
+    def process_request(self, request, spider):
+        def get_ua():
+            return getattr(self.ua, self.ua_type)
+
+        request.headers.setdefault('User-Agent', get_ua())
