@@ -201,3 +201,21 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--proxy-server=http://' + proxy)
 chrome = webdriver.Chrome(chrome_options=chrome_options)
 chrome.get('http://httpbin.org/get')
+
+
+#10
+#selenium_phantomjs_no_auth.py
+from selenium import webdriver
+
+service_args = [
+    '--proxy=127.0.0.1:9743',
+    '--proxy-type=http'
+]
+
+browser = webdriver.PhantomJS(service_args=service_args)
+browser.get('http://httpbin.org/get')
+print(browser.page_source)
+
+
+#11
+#1
