@@ -44,3 +44,27 @@ class RandomUserAgentMiddlware(object):
    'ArticleSpider.middlewares.RandomUserAgentMiddlware': 543,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None
 }
+
+
+2.
+使用西刺免费代理，不稳定不好用
+在主目录下新建个tools的目录，新建个crawl_xici_ip.py文件，代码详见
+然后在middlewares.py文件中配置对象RandomProxyMiddleware
+class RandomProxyMiddleware(object):
+    #动态设置ip代理
+    def process_request(self,request,spider):
+        get_ip = Get_IP()
+        request.meta["proxy"] = get_ip.get_random_ip()
+        
+ 然后在settings.py文件中引入middlewares.py中的对象
+ /project_name/settings.py)添加
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+    'project_name.middlewares.ProxyMiddleware': 100,
+}
+
+
+另外的方式：
+
+
+
