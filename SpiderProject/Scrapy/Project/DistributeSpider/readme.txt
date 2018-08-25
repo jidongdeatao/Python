@@ -22,3 +22,7 @@ selenium融入进Scrapy
 4、
 Srapy-Redis分布式爬虫
 
+
+注意：使用scrapy shell 进行调试的时候要加上user-agent：
+需要注意 网站做了限制爬虫，所以需要加上user-agent
+    scrapy shell -s USER_AGENT="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.86 Safari/537.36" url
