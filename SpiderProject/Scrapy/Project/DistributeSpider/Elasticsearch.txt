@@ -71,9 +71,28 @@ head插件安装
     带有倒排索引的文件我们称为倒排索引文件，简称倒排文件(inverted file).
     
  三、基本操作
-    批量操作
-    映射（mapping):创建索引的时候，可以预先定义字段的类型以及相关属性
-    
+    3.批量操作
+    4.映射（mapping):创建索引的时候，可以预先定义字段的类型以及相关属性。作用：会让索引建立的更加细致和完善
+        创建索引时，可以预先定义字段的类型以及相关属性，每个字段定义一种类型，属性比mysql里面丰富，前面没有传入，
+        因为elasticsearch会根据json源数据来猜测是什么基础类型。M挨批评就是我们自己定义的字段的数据类型，
+        同时告诉elasticsearch如何索引数据以及是否可以被搜索。
+        相关属性的配置：
+            String类型： 两种text keyword。text会对内部的内容进行分析，索引，进行倒排索引等，为设置为keyword则会当成字符串，
+                        不会被分析，只能完全匹配才能找到String。 在es5已经被废弃了
+            日期类型：date 以及datetime等
+            数据类型:integer long double等等
+            bool类型
+            binary类型
+            复杂类型：object nested
+            geo类型：geo-point地理位置
+            专业类型：ip competition
+            object ：json里面内置的还有下层{}的对象
+            nested：数组形式的数据
+    5.查询
+        基本查询
+        组合查询
+        过滤
+    6.
     
     
     
