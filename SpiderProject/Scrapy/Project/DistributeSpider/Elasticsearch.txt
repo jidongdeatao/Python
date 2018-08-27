@@ -44,6 +44,7 @@ head插件安装
     http.cors.allow-origin: "*"
     http.cors.allow-methods: OPTIONS, HEAD, GET, POST, PUT, DELETE
     http.cors.allow-headers: "X-Requested-With, Content-Type, Content-Length, X-User"
-
+    
+    然后重新启动elasticsearch，打开127.0.0.1:9100 就会发现可以连接成功
 
 kibana的安装：
