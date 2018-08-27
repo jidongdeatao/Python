@@ -1,4 +1,4 @@
-Elasticsearch安装：
+1.Elasticsearch安装：
 使用的版本
 来自：
 https://github.com/medcl/elasticsearch-rtf
@@ -47,4 +47,12 @@ head插件安装
     
     然后重新启动elasticsearch，打开127.0.0.1:9100 就会发现可以连接成功
 
-kibana的安装：
+3.kibana的安装：
+    需要下载与elasticsearch-rtf一致的版本，目前都是5.1.1
+    在官网下载后，cd bin目录下
+    ./kibana
+    在浏览器打开 http://127.0.0.1:5601
+
+###########################################################
+
+
