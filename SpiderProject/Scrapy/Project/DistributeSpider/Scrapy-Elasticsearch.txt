@@ -1,3 +1,15 @@
+Elasticsearch作为Scrapy数据存入与读取的数据库
+
+首先在item.py中建立连接
+from elasticsearch_dsl.connections import connections
+es = connections.create_connection(ArticleType._doc_type.using)
+
+
+
+首先在pipelines.py中配置：
+
+
+
 
 1.安装Elasticsearch
 2.安装python-elasticsearch-dsl插件
