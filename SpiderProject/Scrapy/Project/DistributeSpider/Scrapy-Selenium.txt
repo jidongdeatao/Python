@@ -1,0 +1,2 @@
+Scrapy-Selenium
+使用selenium是为了抓取那些写入到JavaScript中的内容
