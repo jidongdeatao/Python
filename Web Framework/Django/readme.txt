@@ -42,3 +42,15 @@ Django目录结构：
                 models.py  : Django 自带的ORM，用于设计数据库表
                 tests.py  :  用于编写Django单元测试
                 veiws.py ：视图文件，用于编写功能的主要处理逻辑
+    新建templates与static目录后，要在settings.py文件中加入路径：
+        TEMPLATES = [
+            {
+                ...
+                'DIRS': [os.path.join(BASE_DIR, 'templates')],
+                ...
+            }]
+        #文件最后加入static路径：
+        STATICFILES_DIRS = [
+            os.path.join(BASE_DIR, "static")
+        ]
+
