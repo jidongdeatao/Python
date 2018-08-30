@@ -22,6 +22,11 @@ selenium融入进Scrapy
 4、
 Srapy-Redis分布式爬虫
 
+5、
+ElasticSearch数据库集成到Scrapy
+
+6、
+Scrapy融入进Django
 
 注意：使用scrapy shell 进行调试的时候要加上user-agent：
 需要注意 网站做了限制爬虫，所以需要加上user-agent
