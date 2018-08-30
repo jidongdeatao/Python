@@ -1,0 +1,6 @@
+Scrapy提供给Django接口
+
+1.搭建Django框架
+1）使用Django虚拟环境，新建个Django项目
+
+2）配置
