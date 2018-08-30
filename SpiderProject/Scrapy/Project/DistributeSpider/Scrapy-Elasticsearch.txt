@@ -1,6 +1,9 @@
 Elasticsearch作为Scrapy数据存入与读取的数据库
 
-首先在item.py中建立连接
+1.建立Elasticsearch数据库
+在主目录下，新建个models文件夹
+
+在item.py中建立连接
 from elasticsearch_dsl.connections import connections
 es = connections.create_connection(ArticleType._doc_type.using)
 
