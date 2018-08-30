@@ -14,15 +14,16 @@
 这里涉及到一个新的知识点：crawl模版的使用
 
 2、
-加入反爬虫策略
+加入反爬虫策略：设置User-Agent与Proxy代理池
 
 3、
-selenium融入进Scrapy
+Scrapy-Selenium
 
 4、
 Srapy-Redis分布式爬虫
 
 5、
+Scrapy-ElasticSearch
 ElasticSearch数据库集成到Scrapy
 
 6、
