@@ -12,7 +12,13 @@ es = connections.create_connection(ArticleType._doc_type.using)
 
 
 1.安装Elasticsearch
+
 2.安装python-elasticsearch-dsl插件
+GitHub地址：https://github.com/elastic/elasticsearch-dsl-py
+官方文档：https://elasticsearch-dsl.readthedocs.io/en/latest/
+安装：
+pip install elasticsearch-dsl
+
 3.
 4.
 5.
