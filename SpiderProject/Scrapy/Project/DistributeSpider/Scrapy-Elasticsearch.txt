@@ -1,6 +1,9 @@
 
 1.安装Elasticsearch
-2.
+2.安装python-elasticsearch-dsl插件
+3.
+4.
+5.
 
 
 
