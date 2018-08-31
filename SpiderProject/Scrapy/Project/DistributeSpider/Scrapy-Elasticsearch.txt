@@ -31,15 +31,53 @@ Elasticsearch作为Scrapy数据存入与读取的数据库
 注意这个内容会随着elasticsearch的版本的更新而发生变化。
 
 
-在item.py中建立连接
+2.在item.py中spider对象后建立个方法
 from elasticsearch_dsl.connections import connections
 es = connections.create_connection(ArticleType._doc_type.using)
 
+class JobBoleArticleItem(scrapy.Item):
+    title = scrapy.Field()
+    create_date = scrapy.Field(
+        input_processor=MapCompose(date_convert),
+    )
+    url = scrapy.Field()
+   ...
+   
+    def save_to_es(self):
+        article = JobboleBlogIndex()
+        article.title = self['title']
+        article.create_date = self["create_date"]
+        article.content = remove_tags(self["content"])
+        article.front_image_url = self["front_image_url"]
+        article.praise_nums = self["praise_nums"]
+        article.fav_nums = self["fav_nums"]
+        article.comment_nums = self["comment_nums"]
+        article.url = self["url"]
+        article.tags = self["tags"]
+        article.meta.id = self["url_object_id"]
+        article.save()
+
+        return
+
+3.在pipelines.py中配置：
+class ElasticsearchPipeline(object):
+    #将数据写入到es中
+    def process_item(self,item,spider):
+        item.save_to_es()
+        return item
+
+4.在settings.py中配置
+ITEM_PIPELINES = {
+    'ArticleSpider.pipelines.ElasticsearchPipeline': 1,
+
+}
 
 
-首先在pipelines.py中配置：
 
 
+
+
+################################################################
 1.安装Elasticsearch
 
 2.安装python-elasticsearch-dsl插件
