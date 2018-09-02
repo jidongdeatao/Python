@@ -2,5 +2,27 @@ Scrapy提供给Django接口
 
 1.搭建Django框架
 1）使用Django虚拟环境，新建个Django项目
+2）新建个APP，settings.py配置APP
+3）新建templates与static目录，settings.py配置这两个目录
+  templates放入html页面，共有两个页面:
+      1.index.html
+        首页，页面功能：
+          1.能够提交搜索结果
+          2.展示历史搜索与热门搜索功能
+      2.result.html
+        结果页面，页面功能：
+          1.展示搜索结果（结果链接可点击），具有分页功能
+          2.展示搜索所花时间、历史搜索与热门搜索功能
+          3.展示数据库爬取网站数据的总条数
+  static放入css、js、image等文件
+4）在urls.py中配置
+    index
+    suggets（搜索建议）URL
+    search（搜索结果）URL
+    
+    
+   
 
-2）配置
+
+
+
