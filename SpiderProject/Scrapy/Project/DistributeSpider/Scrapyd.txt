@@ -1,0 +1,10 @@
+Scrapyd
+下载地址：
+https://github.com/scrapy/scrapyd
+文档：
+http://scrapyd.readthedocs.io
+
+使用Scrapyd进行部署scrapy爬虫
+命令：
+
+
