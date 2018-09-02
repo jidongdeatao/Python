@@ -19,7 +19,9 @@ Scrapy提供给Django接口
     index
     suggets（搜索建议）URL
     search（搜索结果）URL
-    
+5）在APP views.py中设置
+  连接数据库
+  处理Request、返回Response的方法
     
    
 
