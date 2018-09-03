@@ -24,6 +24,7 @@ ubunt安装ansible
 
 
 ansible配置文件解释：
+一、
 Ansible.cfg是ansible自动化任务所用的一个核心配置文件，大部分的配置文件都集中在defualts配置项目中。
 [defaults]
     1）inventory 该参数表示资源清单inventory文件的位置，资源清单就是一些Ansible需要连接管理的主机列表 inventory = /root/ansible/hosts
@@ -45,3 +46,16 @@ Ansible.cfg是ansible自动化任务所用的一个核心配置文件，大部�
 [privilege_escalation] #执行命令的用户权限设置
 [paramiko_connection] #paramika插件设置
 [ssh_connection] #ssh连接设置
+
+还有更多的配置项，大家可以参考官方文档，如下：
+http://docs.ansible.com/ansible/latest/intro_configuration.html#private-key-file
+
+
+二、
+hosts配置文件
+[group_name]
+test1 ansible_ssh_host = IP ansible_ssh_post=22
+ansible_ssh_user=root  ansible_ssh_private_key_file=/home/ssh_keys/id_rsa
+
+别名+ssh用户+ssh密钥
+
