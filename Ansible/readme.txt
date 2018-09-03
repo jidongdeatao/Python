@@ -24,3 +24,6 @@ ansible的配置文件：
 
 图文教程：
 http://blog.51cto.com/191226139/2066936
+
+慕课网免费课程：
+https://www.imooc.com/video/15229
