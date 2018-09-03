@@ -146,7 +146,9 @@ head插件安装
 
 3.kibana的安装：
     需要下载与elasticsearch-rtf一致的版本，目前都是5.1.1
-    在官网下载后，cd bin目录下
+    在官网
+    https://www.elastic.co/downloads/past-releases/kibana-5-2-1
+    下载后，cd bin目录下
     ./kibana
     在浏览器打开 http://127.0.0.1:5601
 
