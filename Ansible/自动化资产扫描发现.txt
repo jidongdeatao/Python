@@ -24,3 +24,4 @@
     tm = telnetlib.Telnet(host='IP',port='22',timeout=4)
     print tm.read_until("\n",timeout=5)
   
+4.主机登陆探测
