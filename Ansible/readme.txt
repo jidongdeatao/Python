@@ -1,3 +1,15 @@
+
+Python运维开发场景：
+   基础（python基础-Django基础-DevOps构建）
+    ||
+    \/
+自动化资产扫描发现（资产扫描作用、nmap存活扫描、telnetlib端口扫描、perspect登陆探测、paramiko登陆探测、docker容器扫描、KVM虚拟机扫描、snmp网络设备、SDK调用扫描ESXI）
+    ||
+    \/
+ansible自动化任务（ansible安装、python ansible、ansible adhoc、ansible playbook、核心类调用、api接口封装、方法改写、Redis消息存储、Mongo事件日志)
+
+
+
 ansible是python中的一套模块，系统中的一套自动化工具，可以用来做系统管理、自动化命令等任务。
 
 ansible的play_book模式，采用yaml配置，对于自动化任务执行一目了然。
