@@ -61,3 +61,5 @@ pexpect和paramiko模块：
     >>> print stderr.readlines()
 获取主机名的命令：
 hostname、uname -a 、cat /etc/sysconfig/network等
+获取系统版本：
+cat /etc/issue、cat /etc/rehat-release、uname、lsb_release
