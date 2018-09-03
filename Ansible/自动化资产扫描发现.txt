@@ -59,3 +59,5 @@ pexpect和paramiko模块：
     >>> stdin,stdout,stderr = jssh.exec_command('ls /tmp')
     >>> print stdout.read()
     >>> print stderr.readlines()
+获取主机名的命令：
+hostname、uname -a 、cat /etc/sysconfig/network等
