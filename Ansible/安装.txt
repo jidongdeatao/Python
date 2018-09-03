@@ -1,6 +1,11 @@
 基于python
 安装ansible方式：
 1.通过系统方式，yum、apt-get等
+ubunt安装ansible
+    apt-get install software-properties-common
+    apt-add-repository ppa:ansible/ansible
+    apt-get update
+    apt-get install ansible
 2.通过python的方式
   （推荐）python ./setup.py install
   easy_install ansible
