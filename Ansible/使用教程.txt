@@ -1,1 +1,6 @@
+如何添加一台机器？
+1、添加主机到/etc/ansible/hosts
+2、添加本机的公钥到目标机器
+3、添加本机的私钥到ansible
+4、运行ansible all -m ping测试是否添加成功
 
