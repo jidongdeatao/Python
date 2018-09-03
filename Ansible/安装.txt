@@ -1,4 +1,9 @@
 基于python
-安装ansible
+安装ansible方式：
+1.通过系统方式，yum、apt-get等
+2.通过python的方式
+  （推荐）python ./setup.py install
+  easy_install ansible
+  pip install ansible
 
 
