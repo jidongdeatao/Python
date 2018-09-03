@@ -65,5 +65,6 @@ hostname、uname -a 、cat /etc/sysconfig/network等
 cat /etc/issue、cat /etc/rehat-release、uname、lsb_release
 获取MAC地址：
 linux系统：cat /sys/class/net/eth0/address 、 ifconfig eth0、ip a
-cat /sys/class/net/eth0/address 这个命令可以使用cat /sys/class/net/[^vtlsb]*/address
+    cat /sys/class/net/eth0/address 这个命令可以使用cat /sys/class/net/[^vtlsb]*/address
 ESXI: esxcfg-vmknic -l
+通用命令：cat /sys/class/net/[^vtlsb]*/address || esxcfg-vmknic -l |awk '{print $8}'|grep ':'
