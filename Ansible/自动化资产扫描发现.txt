@@ -68,6 +68,9 @@ pexpect和paramiko模块：
         cat /sys/class/net/eth0/address 这个命令可以使用cat /sys/class/net/[^vtlsb]*/address
     ESXI: esxcfg-vmknic -l
     通用命令：cat /sys/class/net/[^vtlsb]*/address || esxcfg-vmknic -l |awk '{print $8}'|grep ':'
-获取
-
-获取物理机
+获取服务器硬件机型：
+    dmidecode -s system-manufacturer 、 dmidecode -s system-product-name
+    没有这个dmidecode命令需要安装
+    yum install dmidecode
+获取物理机序列号：
+     dmidecode -s system-serial-number
