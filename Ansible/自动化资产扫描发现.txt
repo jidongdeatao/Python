@@ -1,5 +1,6 @@
 自动化资产扫描发现
-（资产扫描作用、nmap存活扫描、telnetlib端口扫描、perspect登陆探测、paramiko登陆探测、docker容器扫描、KVM虚拟机扫描、snmp网络设备、SDK调用扫描ESXI）
+（资产扫描作用、nmap存活扫描、telnetlib端口扫描、perspect登陆探测、paramiko登陆探测、docker容器扫描、KVM虚拟机扫描、snmp网络设备、
+SDK调用扫描ESXI）
 
 
 
@@ -25,3 +26,5 @@
     print tm.read_until("\n",timeout=5)
   
 4.主机登陆探测
+主机存活探测（得到存活主机IP列表）-> ssh端口探测（区分Linux与非Linux主机列表,得到可SSH登录主机列表）-> 
+                            ssh登录探测（得到SSH用户密码登录列表与SSH Key登录列表）-> 主机信息获取（需要获取的主机信息)
