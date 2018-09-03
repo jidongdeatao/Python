@@ -55,3 +55,7 @@ pexpect和paramiko模块：
     >>> jssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     >>> key = paramiko.RSAKey.from_private_key_file('密钥位置')
     >>> jssh.connect('IP','22','用户名',pkey=key)
+    在登陆成功的主机输入命令，
+    >>> stdin,stdout,stderr = jssh.exec_command('ls /tmp')
+    >>> print stdout.read()
+    >>> print stderr.readlines()
