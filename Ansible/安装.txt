@@ -24,15 +24,23 @@ ubunt安装ansible
 
 
 ansible配置文件解释：
+Ansible.cfg是ansible自动化任务所用的一个核心配置文件，大部分的配置文件都集中在defualts配置项目中。
 [defaults]
-ask_pass #控制ansible 剧本playbook是否会开启自动默认弹出的密码
-ask_sudo_pass #用户使用的系统平台开启了sudo密码的话，应该开启这一参数
-gather_subset #设置收集的内容：包含all、network、hardware、virtual、factor、ohai
-remote_port&remote_tmp&remote_user #客户机的设置,分别对登陆的用户和端口，以及临时目录
-sudo_exe & sudo_flags & sudo_user #sudo命令相关设置,分别是sudo命令路径、sudo参数、能够使用sudo的user
-forks  #最大开启的进程数，一般的设置方法是cpu核数*2
-module_name #
-valut_password_file #以脚本的形式将密码打印到标准输出中，脚本需要请求数据，请求将会发送到标准错误
+    1）inventory 该参数表示资源清单inventory文件的位置，资源清单就是一些Ansible需要连接管理的主机列表 inventory = /root/ansible/hosts
+    2）library Ansible的操作动作，无论是本地或远程，都使用一小段代码来执行，这小段代码称为模块，这个library参数就是指向存放Ansible模块的目录 library = /usr/share/ansible 
+    3）forks 设置默认情况下Ansible最多能有多少个进程同时工作，默认设置最多5个进程并行处理。具体需要设置多少个，可以根据控制主机的性能和被管理节点的数量来确定。 forks = 5 
+    4）sudo_user 这是设置默认执行命令的用户，也可以在playbook中重新设置这个参数 sudo_user = root //注意:新版本已经作了修改，如ansible2.4.1下已经为： default_sudo_user = root 
+    sudo_exe & sudo_flags & sudo_user #sudo命令相关设置,分别是sudo命令路径、sudo参数、能够使用sudo的user
+    5）remote_port 这是指定连接被关节点的管理端口，默认是22，除非设置了特殊的SSH端口，不然这个参数一般是不需要修改的 remote_port = 22 
+        remote_port&remote_tmp&remote_user #客户机的设置,分别对登陆的用户和端口，以及临时目录
+    6）host_key_checking 这是设置是否检查SSH主机的密钥。可以设置为True或False host_key_checking = False 
+    7）timeout 这是设置SSH连接的超时间隔，单位是秒。 timeout = 20 
+    8）log_path Ansible系统默认是不记录日志的，如果想把Ansible系统的输出记录到人i治稳健中，需要设置log_path来指定一个存储Ansible日志的文件 log_path = /var/log/ansible.log 另外需要注意，执行Ansible的用户需要有写入日志的权限，模块将会调用被管节点的syslog来记录，口令是不会出现的日志中的 
+    9）private_key_file 在使用ssh公钥私钥登录系统时候，使用的密钥路径。 private_key_file=/path/to/file.pem
+    10) ask_pass #控制ansible 剧本playbook是否会开启自动默认弹出的密码
+        ask_sudo_pass #用户使用的系统平台开启了sudo密码的话，应该开启这一参数
+    11) gather_subset #设置收集的内容：包含all、network、hardware、virtual、factor、ohai
+    12) valut_password_file #以脚本的形式将密码打印到标准输出中，脚本需要请求数据，请求将会发送到标准错误
 #还有一些插件命令
 [privilege_escalation] #执行命令的用户权限设置
 [paramiko_connection] #paramika插件设置
