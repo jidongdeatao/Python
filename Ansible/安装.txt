@@ -57,5 +57,5 @@ hosts配置文件
 test1 ansible_ssh_host = IP ansible_ssh_post=22
 ansible_ssh_user=root  ansible_ssh_private_key_file=/home/ssh_keys/id_rsa
 
-别名+ssh用户+ssh密钥
+格式为：别名+ssh用户+ssh密钥
 
