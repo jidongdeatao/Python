@@ -2,6 +2,9 @@ ansible是python中的一套模块，系统中的一套自动化工具，可以�
 
 ansible的play_book模式，采用yaml配置，对于自动化任务执行一目了然。
 
+GitHub地址：
+https://github.com/ansible/ansible
+
 自动化任务执行
 举例：
 在n台服务器安装某服务，自动化任务执行只需要将步骤
