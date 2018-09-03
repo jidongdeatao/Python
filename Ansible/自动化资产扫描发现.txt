@@ -63,3 +63,6 @@ pexpect和paramiko模块：
 hostname、uname -a 、cat /etc/sysconfig/network等
 获取系统版本：
 cat /etc/issue、cat /etc/rehat-release、uname、lsb_release
+获取MAC地址：
+linux系统：cat /sys/class/net/eth0/address 、 ifconfig eth0、ip a
+ESXI: esxcfg-vmknic -l
