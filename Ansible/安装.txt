@@ -20,3 +20,19 @@ ubunt安装ansible
   vi ansible.cfg
   在里面输入指令：
     
+
+
+
+ansible配置文件解释：
+[defaults]
+ask_pass #控制ansible 剧本playbook是否会开启自动默认弹出的密码
+ask_sudo_pass #用户使用的系统平台开启了sudo密码的话，应该开启这一参数
+gather_subset #设置收集的内容：包含all、network、hardware、virtual、factor、ohai
+remote_port&remote_tmp&remote_user #客户机的设置,分别对登陆的用户和端口，以及临时目录
+sudo_exe & sudo_flags & sudo_user #sudo命令相关设置,分别是sudo命令路径、sudo参数、能够使用sudo的user
+forks  #最大开启的进程数，一般的设置方法是cpu核数*2
+module_name #
+#还有一些插件命令
+[privilege_escalation] #执行命令的用户权限设置
+[paramiko_connection] #paramika插件设置
+[ssh_connection] #ssh连接设置
