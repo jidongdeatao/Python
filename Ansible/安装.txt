@@ -52,7 +52,7 @@ http://docs.ansible.com/ansible/latest/intro_configuration.html#private-key-file
 
 
 二、
-hosts配置文件
+hosts配置文件（主机资产清单配置方式）
 [group_name]
 test1 ansible_ssh_host = IP ansible_ssh_post=22
 ansible_ssh_user=root  ansible_ssh_private_key_file=/home/ssh_keys/id_rsa
