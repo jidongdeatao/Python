@@ -1,1 +1,26 @@
 自动化资产扫描发现
+（资产扫描作用、nmap存活扫描、telnetlib端口扫描、perspect登陆探测、paramiko登陆探测、docker容器扫描、KVM虚拟机扫描、snmp网络设备、SDK调用扫描ESXI）
+
+
+
+
+2.nmap存活扫描(使用python2.7 python-nmap库)
+    利用到的探测协议
+    ICMP 特性：无连接 用途：网络探测、网络质量
+    TCP  特性：有连接 用途：应用协议
+    利用nmap工具参数：
+      nmap -n -sP IP
+      nmap -n -PE IP
+      nmap -n -sP -PE 192.168.1.0/24
+    命令：
+    import nmap
+    nm = nmap.PortScanner()
+    print(nm.scan(hosts="IP网段",arguments="-n -sP -PE"))
+    print(nm.all_hosts())
+
+3.SSH端口存活扫描(使用python2.7 telnetlib库):
+    命令：
+    import telnetlib
+    tm = telnetlib.Telnet(host='IP',port='22',timeout=4)
+    print tm.read_until("\n",timeout=5)
+  
