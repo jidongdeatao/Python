@@ -12,13 +12,7 @@ https://github.com/ansible/ansible
 
 自动化任务执行的应用：
 
-ansible的配置文件：
-  /etc/ansible/
-    |--ansible.cfg
-    |--hosts
-  说明：
-    ansible.cfg:ansible执行需求的全局性、默认的配置文件
-    hosts：默认的主机资产清单文件
+
 
 
 
