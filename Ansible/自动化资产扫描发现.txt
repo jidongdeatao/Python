@@ -34,12 +34,13 @@ SDK调用扫描ESXI）
     输入密码
 密钥登陆方式：
     ssh -i 密钥位置 -l 用户名 IP -p 22
-pexpect用来通过启动子程序，使用正则表达式对程序输出做出特定响应，以此实现与其自动交互的python模块。
-    pexpect的run()函数:直接执行命令和返回结果
-        命令：
-        import pexpect
-pexpect场景：
+pexpect和paramiko模块：
+    pexpect用来通过启动子程序，使用正则表达式对程序输出做出特定响应，以此实现与其自动交互的python模块。
+        pexpect的run()函数:直接执行命令和返回结果
+            命令：
+            import pexpect
+    pexpect场景：
 
     
-paramiko基于Python实现的SSH远程安全连接，用于SSH远程执行命令、文件传输等功能的ssh客户端模块。
+    paramiko基于Python实现的SSH远程安全连接，用于SSH远程执行命令、文件传输等功能的ssh客户端模块。
 
