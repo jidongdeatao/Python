@@ -7,3 +7,11 @@
   pip install ansible
 
 
+第一次安装ansible，在/etc/下没有ansible配置文件，需要新建文件夹
+命令：
+  cd /etc
+  mkdir ansible
+  cd ansible
+  vi ansible.cfg
+  在里面输入指令：
+    
