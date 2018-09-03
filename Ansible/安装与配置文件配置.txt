@@ -21,7 +21,13 @@ ubunt安装ansible
   在里面输入指令：
     
 
-
+ansible的配置文件：
+  /etc/ansible/
+    |--ansible.cfg
+    |--hosts
+  说明：
+    ansible.cfg:ansible执行需求的全局性、默认的配置文件
+    hosts：默认的主机资产清单文件
 
 ansible配置文件解释：
 一、
