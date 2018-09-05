@@ -1,4 +1,6 @@
 爬取FreeBuf.com文章
+不能直接取到网页数据
+选择使用Selenium+Phantomjs进行爬取
 
 
 1.使用命令
