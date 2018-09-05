@@ -104,44 +104,6 @@ class JSPageMiddleware(object):
 }
  
 
-5.由于元素有部分数据需要进一步处理，这里需要在items.py文件的LagouJobItem对象前加入处理函数：
-      def remove_splash(value):
-          #去掉工作城市的斜线
-          return value.replace("/","")
+        
+        
 
-    然后在对象中引用：
-    class LagouJobItem(scrapy.Item):
-        job_city = scrapy.Field(
-            input_processor = MapCompose(remove_splash)
-        )
-        
-        
-6.在pipelines.py中定义了保存数据库的模版，
-  class MysqlTwistedPipeline(object):
-    def __init__(self, dbpool):
-        self.dbpool = dbpool
-    ......
-    def do_insert(self, cursor, item):
-        # 执行具体的插入
-        # 根据不同的item 构建不同的sql语句并插入到mysql中
-        insert_sql, params = item.get_insert_sql()
-        cursor.execute(insert_sql, params)
-        
-        
-7.在items.py文件中的LagouJobItem()对象下加入与数据库建立连接并执行的语句：
-     def get_insert_sql(self):
-        insert_sql = """
-            insert into lagou_job(title, url, url_object_id, salary, job_city, work_years, degree_need,
-            job_type, publish_time, job_advantage, job_describe, job_addr, company_name, company_url,
-            tags, crawl_time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            ON DUPLICATE KEY UPDATE salary=VALUES(salary), job_describe=VALUES(job_describe)
-        """
-        params = (
-            self["title"], self["url"], self["url_object_id"], self["salary"], self["job_city"],
-            self["work_years"], self["degree_need"], self["job_type"],
-            self["publish_time"], self["job_advantage"], self["job_describe"],
-            self["job_addr"], self["company_name"], self["company_url"],
-            self["tags"], self["crawl_time"].strftime(SQL_DATETIME_FORMAT),
-        )
-
-        return insert_sql, params
