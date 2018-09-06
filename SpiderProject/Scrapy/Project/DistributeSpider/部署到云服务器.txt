@@ -27,6 +27,10 @@
   # ln -s /usr/local/bin/python3.6 /usr/bin/python3
   # ln -s /usr/local/bin/pip3.6 /usr/bin/pip3
     这样只需要在命令行中输入python3 就可以进入python3 运行环境
+    
+     高版本yum依赖问题
+　　安装高版本python后会有一个非常蛋疼的问题，yum是依赖于python的，安装python3后yum就没办法直接用了，需要直接指定修改yum中python脚本的解释器才能使用。
+　　修改/usr/bin/yum和/usr/bin/urlgrabber-ext-down两个文件的头文件，即将第一行#!/usr/bin/python 改为 #!/usr/bin/python2
  2.建立python虚拟环境
     在/opt目录下建立目录SpiderProject
     这里使用python2.7 pip 安装虚拟环境
