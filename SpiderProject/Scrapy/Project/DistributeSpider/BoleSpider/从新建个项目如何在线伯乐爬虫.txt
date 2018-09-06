@@ -1,14 +1,225 @@
 pip安装的库
 Scrapy
-mysql-python
+mysql-python #这里遇到个问题，CentOS pip一直没有安装成功
 
 
 一、新建项目
    新建APP
-二、复制代码到APP中
-    复制代码到items.py中
-    复制代码到pipelines.py中
-    复制代码到settings.py中
+二、
+1.复制代码到APP中
+代码如下：
+# -*- coding: utf-8 -*-
+import scrapy
+from scrapy.http import Request
+from urllib import parse
+from ArticleSpider.items import JobBoleArticleItem
+from ArticleSpider.items import JobBoleArticleItemLoader
+import re
+import datetime
+from ArticleSpider.utils.common import get_md5
+from scrapy.loader import ItemLoader
+
+
+class JobboleSpider(scrapy.Spider):
+    name = 'jobbole'
+    allowed_domains = ['blog.jobbole.com']
+    start_urls = ['http://blog.jobbole.com/all-post']
+
+    def parse(self, response):
+        #Xpath的用法
+        post_nodes = response.xpath('//div[@class="post floated-thumb"]/div[@class="post-thumb"]/a')
+        for post_node in post_nodes:
+            post_url = post_node.xpath('@href').extract()[0]
+            img_url = post_node.xpath('img/@src').extract()[0]
+            yield Request(url=parse.urljoin(response.url,post_url),meta={"front_image_url":img_url},callback=self.parse_details)
+
+        next_url = response.xpath('//div[@class="navigation margin-20"]/a[@class="next page-numbers"]/@href').extract()[0]
+        if next_url:
+            yield Request(url=parse.urljoin(response.url,next_url),callback=self.parse)
+
+
+    def parse_details(self, response):
+        #实例化
+        article_item = JobBoleArticleItem()
+
+        front_image_url = response.meta.get("front_image_url", "")  # 文章封面图
+
+        # 通过item loader加载item
+        item_loader = JobBoleArticleItemLoader(item=JobBoleArticleItem(), response=response)
+
+        # 通过css选择器将后面的指定规则进行解析。
+        item_loader.add_css("title", ".entry-header h1::text")
+        item_loader.add_value("url", response.url)
+        item_loader.add_value("url_object_id", get_md5(response.url))
+        item_loader.add_css("create_date", "p.entry-meta-hide-on-mobile::text")
+        item_loader.add_value("front_image_url", [front_image_url])
+        item_loader.add_css("praise_nums", ".vote-post-up h10::text")
+        item_loader.add_css("comment_nums", "a[href='#article-comment'] span::text")
+        item_loader.add_css("fav_nums", ".bookmark-btn::text")
+        item_loader.add_css("tags", "p.entry-meta-hide-on-mobile a::text")
+        item_loader.add_css("content", "div.entry")
+
+        # 调用这个方法来对规则进行解析生成item对象
+        article_item = item_loader.load_item()
+
+        # 已经填充好了值调用yield传输至pipeline
+        yield article_item
+2.由于上面引用了md5方法，在根目录下新建ArticleSpider/utils/common.py文件
+代码如下：
+import hashlib
+def get_md5(url):
+    if isinstance(url, str):
+        url = url.encode("utf-8")
+    m = hashlib.md5()
+    m.update(url)
+    return m.hexdigest()
+   
+3.复制代码到items.py中
+代码如下：
+# -*- coding: utf-8 -*-
+
+# Define here the models for your scraped items
+#
+# See documentation in:
+# https://doc.scrapy.org/en/latest/topics/items.html
+
+import scrapy
+import datetime,re
+from scrapy.loader import ItemLoader
+from scrapy.loader.processors import TakeFirst, MapCompose, Join
+from w3lib.html import remove_tags
+from ArticleSpider.settings import SQL_DATETIME_FORMAT, SQL_DATE_FORMAT
+
+
+class ArticlespiderItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    pass
+
+#---------------伯乐在线网处理页面元素函数---------------
+# 字符串转换时间方法
+def date_convert(value):
+    try:
+        create_date = datetime.datetime.strptime(value, "%Y/%m/%d").date()
+    except Exception as e:
+        create_date = datetime.datetime.now().date()
+    return create_date
+# 获取字符串内数字方法
+def get_nums(value):
+    match_re = re.match(".*?(\d+).*", value)
+    if match_re:
+        nums = int(match_re.group(1))
+    else:
+        nums = 0
+    return nums
+# 去除标签中提取的评论方法
+def remove_comment_tags(value):
+    if "评论" in value:
+        return ""
+    else:
+        return value
+# 直接获取值方法
+def return_value(value):
+    return value
+
+# 自定义itemloader实现默认取第一个值
+class JobBoleArticleItemLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+
+class JobBoleArticleItem(scrapy.Item):
+    title = scrapy.Field()
+    create_date = scrapy.Field(
+        input_processor=MapCompose(date_convert),
+    )
+    url = scrapy.Field()
+    url_object_id = scrapy.Field()
+    front_image_url = scrapy.Field(
+        # 使用自定义的outprocessor覆盖原始的take first 使得image_url是一个列表。
+        output_processor=MapCompose(return_value)
+    )
+    front_image_path = scrapy.Field()
+    #这样获取以下三个值可以共用get_nums方法
+    praise_nums = scrapy.Field(
+        input_processor=MapCompose(get_nums)
+    )
+    comment_nums = scrapy.Field(
+        input_processor=MapCompose(get_nums)
+    )
+    fav_nums = scrapy.Field(
+        input_processor=MapCompose(get_nums)
+    )
+    tags = scrapy.Field(
+        input_processor=MapCompose(remove_comment_tags),
+        # list使用逗号连接
+        output_processor=Join(",")
+    )
+    content = scrapy.Field()
+
+    def make_data_clean(self):
+        front_image_url = ""
+        # content = remove_tags(self["content"])
+
+        if self["front_image_url"]:
+            self["front_image_url"] = self["front_image_url"][0]
+        str = self["create_date"].strip().replace("·", "").strip()
+        self["create_date"] = datetime.datetime.strptime(
+            str, "%Y/%m/%d").date()
+        nums = 0
+        value = self["praise_nums"]
+        match_re = re.match(".*?(\d+).*", value)
+        if match_re:
+            nums = int(match_re.group(1))
+        else:
+            nums = 0
+        self["praise_nums"] = nums
+
+    def get_insert_sql(self):
+        insert_sql = """
+            insert into jobbole_article(title, url, url_object_id,create_date, fav_nums, front_image_url, front_image_path,
+            praise_nums, comment_nums, tags, content)
+            VALUES (%s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE fav_nums=VALUES(fav_nums),praise_nums=VALUES(praise_nums),comment_nums=VALUES(comment_nums)
+        """
+        self.make_data_clean()
+        params = (
+            self["title"],
+            self["url"],
+            self["url_object_id"],
+            self["create_date"],
+            self["fav_nums"],
+            self["front_image_url"],
+            self["front_image_path"],
+            self["praise_nums"],
+            self["comment_nums"],
+            self["tags"],
+            self["content"]
+        )
+        return insert_sql, params
+4.复制代码到pipelines.py中
+
+5.复制代码到settings.py中
+   需要进行的操作有：
+   import os 
+   COOKIES_ENABLED = False #设为False
+   
+
+
+   在最后加入：
+   IMAGES_URLS_FIELD = "front_image_url"
+   project_dir = os.path.abspath(os.path.dirname(__file__))
+   IMAGES_STORE = os.path.join(project_dir, 'images')
+   import sys
+   BASE_DIR = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
+   sys.path.insert(0, os.path.join(BASE_DIR, 'ArticleSpider'))
+
+   RANDOM_UA_TYPE = "random"
+
+   MYSQL_HOST = "127.0.0.1"
+   MYSQL_DBNAME = "spider_a"
+   MYSQL_USER = "root"
+   MYSQL_PASSWORD = "rootpassword"
+
+   SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+   SQL_DATE_FORMAT = "%Y-%m-%d"
     
 三、新建数据库spider_a
    create database `spider_a` default character set utf8 COLLATE utf8_general_ci;
