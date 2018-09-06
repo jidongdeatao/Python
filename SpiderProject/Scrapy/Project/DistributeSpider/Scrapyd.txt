@@ -4,7 +4,115 @@ https://github.com/scrapy/scrapyd
 文档：
 http://scrapyd.readthedocs.io
 
-使用Scrapyd进行部署scrapy爬虫
-命令：
+也可以使用命令进行安装：
+pip install scrapyd
+pip install scrapyd-client
+在Liunx下要有curl工具
+
+安装完成后，直接运行命令scrapyd即可启动scrapyd。运行scrapyd之后，默认会在运行命令的目录下创建scrapyd运行时需要的logs等目录
+
+部署
+1.让爬虫找到scrapyd
+假设我们有一个豆瓣的爬虫，找到爬虫的scrapy.cfg文件，添加如下内容：
+[deploy:server-douban]
+url = http://localhost:6800/
+project = example
+其中，server-douban是服务器的名字，url是运行scrapyd的服务器的地址，6800是scrapyd的默认监听端口，project是此豆瓣爬虫所在的文件夹。在scrapy.cfg的目录下，检查配置列出当前可用的服务器：
+scrapyd-deploy -l
+2 部署爬虫
+部署操作会打包你的当前项目，如果当前项目下有setup.py文件，就会使用它，没有的会就会自动创建一个。如果后期项目需要打包的话，可以根据自己的需要修改里面的信息，也可以暂时不管它。 从返回的结果里面，我们可以看到部署的状态，项目名称，版本号和爬虫个数，以及当前的主机名称。
+scrapyd-deploy server-douban -p example
+3 检查部署结果
+列出服务器上所有的项目，检查名为example的项目是否已经部署上去了:
+scrapyd-deploy -L server-douban
+4。 按照scrapy.cfg自动部署
+scrapyd-deploy
+5. 运行API
+    调度爬虫
+curl http://localhost:6800/schedule.json -d project=myproject -d spider=somespider
+# 带上参数
+curl http://localhost:6800/schedule.json -d project=myproject -d spider=somespider -d setting=DOWNLOAD_DELAY=2 -d arg1=val1
+    取消运行
+curl http://localhost:6800/cancel.json -d project=myproject -d job=6487ec79947edab326d6db28a2d86511e8247444
+    列出项目
+curl http://localhost:6800/listprojects.json
+    列出版本
+curl http://localhost:6800/listversions.json?project=myproject
+    列出爬虫
+curl http://localhost:6800/listspiders.json?project=myproject
+    列出job
+curl http://localhost:6800/listjobs.json?project=myproject
+    删除版本
+curl http://localhost:6800/delversion.json -d project=myproject -d version=r99
+    删除项目
+curl http://localhost:6800/delproject.json -d project=myproject
+
+
+2. 配置文件
+scrapyd启动的时候会自动搜索配置文件，配置文件的加载顺序如下，最后加载的设置会覆盖前面的设置：
+    /etc/scrapyd/scrapyd.conf
+    ~/etc/scrapyd/conf.d/*
+    scrapyd.conf
+    ~/.scrapyd.conf
+    
+3. 为scrapyd创建启动脚本
+cd至/etc/rc.d/init.d/目录或者/etc/init.d/目录下，创建并编辑名为scrapyd的文件，其中的PORT、HOME、BIN根据大家的实际情况修改：
+PORT=6800
+HOME="/var/scrapyd/"
+BIN="/usr/local/bin/scrapyd"
+ 
+pid=`netstat -lnopt | grep :$PORT | awk '/python/{gsub(/\/python/,"",$7);print $7;}'`
+ 
+start() {
+   if [ -n "$pid" ]; then
+      echo "server already start,pid:$pid"
+      return 0
+   fi
+ 
+   cd $HOME
+   nohup $BIN &amp;
+   echo "start at port:$PORT"
+}
+ 
+stop() {
+   if [ -z "$pid" ]; then
+      echo "not find program on port:$PORT"
+      return 0
+   fi
+ 
+   #结束程序，使用讯号2，如果不行可以尝试讯号9强制结束
+   kill -9 $pid
+   echo "kill program use signal 9,pid:$pid"
+}
+ 
+status() {
+   if [ -z "$pid" ]; then
+      echo "not find program on port:$PORT"
+   else
+      echo "program is running,pid:$pid"
+   fi
+}
+ 
+case $1 in
+   start)
+      start
+   ;;
+   stop)
+      stop
+   ;;
+   status)
+      status
+   ;;
+   *)
+      echo "Usage: {start|stop|status}"
+   ;;
+esac
+ 
+exit 0
+编辑完成后，为scrapyd文件增加执行权限：
+chmod +x scrapyd
+至此，我们已经可以使用service scrapyd start等命令了。如果有需要还可以继续未scrapyd添加到开机启动程序中：
+chkconfig scrapyd on
+
 
 
