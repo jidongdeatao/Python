@@ -1,0 +1,48 @@
+将Django项目部署到云服务器
+这里以CentOS7作为云服务器：
+#不清楚自己版本号可以使用：lsb_release -a、cat /proc/version、uname -a 来进行查询
+一、
+  1.下载Python3
+    最简单的安装方法是直接通过yum安装：
+    # yum search python //先查下yum源支持的python安装版本
+    # yum install python34 //我的yum源最高支持到python3.4
+    yum这里安装不了最新版本，通过源码安装python3.6
+    命令如下：（其中wget URL可以切换为任意一个最新版本）
+  # wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tgz
+  # yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel //安装可能的依赖库
+  # tar -zxvf Python-3.6.2.tgz
+  # cd Python-3.6.2/
+  # ./configure --prefix=/usr/local/ //安装到/usr/local目录
+  # make
+  # make altinstall //此处不能用install安装，因为install不区分版本，会出现多版本混乱的问题
+     安装完成后：
+     python3.6程序的执行文件：/usr/local/bin/python3.6
+    python3.6应用程序目录：/usr/local/lib/python3.6
+    pip3的执行文件：/usr/local/bin/pip3.6
+    pyenv3的执行文件：/usr/local/bin/pyenv-3.6
+    更改python默认链接
+  # cd /usr/bin
+  # mv  python python.backup
+  # ln -s /usr/local/bin/python3.6 /usr/bin/python #这个可以选择性的使用
+  # ln -s /usr/local/bin/python3.6 /usr/bin/python3
+  # ln -s /usr/local/bin/pip3.6 /usr/bin/pip3
+    这样只需要在命令行中输入python3 就可以进入python3 运行环境
+ 2.建立python虚拟环境
+    在/opt目录下建立目录SpiderProject
+    这里使用python2.7 pip 安装虚拟环境
+    安装方法
+      1、安装 virtualenvwrapper
+    pip install virtualenv
+    pip install virtualenvwrapper
+      2、创建目录存放虚拟环境
+    mkdir ~/.virtualenvs
+      3、在.bashrc中末尾添加
+    export WORKON_HOME=~/.virtualenvs
+    source /usr/local/bin/virtualenvwrapper.sh
+      4、运行 source ~/.bashrc
+    安装完，使用命令建立运行环境：
+    sudo virtualenv -p /usr/local/bin/python3.6 spiderlenv
+    source spiderlenv/bin/active
+    进入虚拟
+   
+  
