@@ -1,0 +1,14 @@
+pip安装的库
+Scrapy
+mysql-python
+
+
+一、新建项目
+   新建APP
+二、复制代码到APP中
+    复制代码到items.py中
+    复制代码到pipelines.py中
+    复制代码到settings.py中
+    
+三、新建数据库spider_a
+
