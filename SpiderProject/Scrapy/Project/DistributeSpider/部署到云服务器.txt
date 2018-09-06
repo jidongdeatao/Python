@@ -45,7 +45,9 @@
     source spiderlenv/bin/active
     进入虚拟环境,使用pip 安装
     ###这里遇到个问题，在虚拟环境下使用pip无法安装库####
+    ，是由于文件权限的问题
+    
  3.安装Scrapy
    安装Django
- 
+   安装ElasticSearch
   
