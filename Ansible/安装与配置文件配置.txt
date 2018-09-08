@@ -8,8 +8,10 @@ ubunt安装ansible
     apt-get install ansible
 2.通过python的方式
   （推荐）python ./setup.py install
-  easy_install ansible
-  pip install ansible
+  或者
+      easy_install ansible
+  或者pip方式安装
+      pip install ansible
 
 
 第一次安装ansible，在/etc/下没有ansible配置文件，需要新建文件夹
