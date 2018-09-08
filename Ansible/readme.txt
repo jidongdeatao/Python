@@ -1,3 +1,13 @@
+Ansible
+GitHub地址；
+https://github.com/ansible/ansible
+
+Ansible 默认通过 SSH 协议进行管理。同时 Ansible 是基于 python 的一个模块（paramiko）开发的，遵循 SSH 协议，
+支持加密和认证的方式来进行远程服务器连接，因此 Ansible 不需要客户端和服务端。
+Ansible 可以通过命令来简单执行一些任务，也可以通过 palybook的配置脚本来执行复杂任务，同时 playbook不用分发到远程，在本地就可以执行。
+Ansible 中的 playbook 使用的是 Jinja2 （基于 python 的模板引擎），简单易学
+Ansible 基于模块工作，易于扩展，而模块可以用任何语言编写，并以标准输出的 JSON协议进行通信
+
 
 Python运维开发场景：
    基础（python基础-Django基础-DevOps构建）
