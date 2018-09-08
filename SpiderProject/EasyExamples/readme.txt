@@ -20,9 +20,8 @@ https://list.jd.com/list.html?cat=9987,653,655&page=9&sort=sort_rank_asc&trans=1
 
 
 
-#第九章
-#9.3 定向抓取实战
-#（1）
+# 定向抓取实战
+
 import urllib.request
 import http.cookiejar
 import re
