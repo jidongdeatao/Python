@@ -1,2 +1,5 @@
 
 assert u"搜狐" == driver.title  #断言标题是否正确
+
+print("热门词汇" in driver.page_source)
+如果 关键词在源码中，返回值为True，不然为False
