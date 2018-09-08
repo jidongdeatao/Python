@@ -33,6 +33,16 @@ ansible的基本使用
       执行命名方式：
       $ ansible-playbook **.yaml
       
+      Ansible调试：
+      一、
+      $ ansible-playbook -v test_apache.yaml
+      -v, --verbose。（-vvv 是更详细的模式，-vvvv 启用连接调试）选择 verbose 模式时，会打印出所有模块运行后的变量。
+      二、
+      
+ Ansible插件：
+ 
+
+
 
 
 
