@@ -1,0 +1,20 @@
+一般通过python pip进行安装
+
+Linux上安装：
+  Ubuntu：
+    使用源的方式安装：
+    1.首先，需要更新软件包的信息以及安装通用的管理软件库的工具（software-properties-common）。
+        $ sudo apt-get update
+        $ sudo apt-get install software-properties-common
+    2.安装了软件库管理工具后，就可以通过 add-apt-repository 命令来添加 ansible 的源，将 PPA 添加到系统中去。
+        PPA（Personal Package Archives），个人软件包档案，Ubuntu Launchpad 网站提供的一项源服务，允许个人用户上传软件源代码，通过 Launchpad 进行编译并发布的二进制 deb 软件包，这样使用者就可以便捷的安装最新版的软件。
+        $ sudo python3.4 /usr/bin/add-apt-repository ppa:ansible/ansible
+    注：由于 python 升级之后使用 add-apt-repository 会报错（ImportError：No module named 'apt_pkg'），这是因为在 /usr/lib/python3/dist-packages 中 apt_pkg 的连接只有 python3.4，所以为了避免因为版本的问题这里我们就特别的指定 python 的版本信息。
+    3.最后需要更新一下软件包的信息，以便了解 PPA 中可用的包，然后安装 ansible 软件即可。
+        $ sudo apt-get update
+        $ sudo apt-get install ansible
+    4.验证一下 Ansible 是否安装成功以及版本信息
+        $ ansible --version
+    安装完成后，不会添加数据库，也不会有守护进程启动或继续运行。你只需要把它安装在至少一台机器上，它可以从该中心点来管理远程机器了。
+    
+ 
