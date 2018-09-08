@@ -1,0 +1,6 @@
+
+driver.get_window_size() #获取浏览器的窗体大小
+{'width': 160, 'height': 32}
+driver.get_window_size()['width'] #获取浏览器的宽度
+driver.get_window_size()['height'] #获取浏览器的高度
+driver.set_window_size(100,200) #设置浏览器的窗体大小
