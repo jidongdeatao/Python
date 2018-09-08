@@ -1,1 +1,2 @@
-
+driver.page_source
+driver.page_source[:50] #获取第50行的页面源码
