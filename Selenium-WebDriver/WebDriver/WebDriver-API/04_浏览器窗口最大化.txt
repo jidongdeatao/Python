@@ -1,1 +1,2 @@
 
+dirver.maximize_window()　　#浏览器最大化显示
