@@ -1,1 +1,2 @@
 
+print(driver.title) #获取页面title，可以用于做断言看打开的页面对不对
