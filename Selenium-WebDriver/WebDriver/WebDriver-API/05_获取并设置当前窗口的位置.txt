@@ -1,1 +1,6 @@
 
+driver.get_window_position() #获取当前窗口的位置
+
+driver.set_window_position(y=200, x=400) #设置浏览器坐标
+#y:指的上下走，屏幕最顶部y=0 ；x：指的左右走 ，最左边x=0，不再当前屏幕的会出现负数
+#浏览器最大化的状态再去设置坐标就不起作用了
