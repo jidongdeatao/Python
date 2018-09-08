@@ -1,1 +1,2 @@
 
+assert u"搜狐" == driver.title  #断言标题是否正确
