@@ -19,22 +19,39 @@ ubunt安装ansible
   cd ansible
   vi ansible.cfg
   在里面输入指令：
-    [defaults]
-    inventory      = /etc/ansible/hosts
-    library        = /usr/share/ansible/
-    forks          = 5
-    sudo_user      = root
-    remote_port    = 22
-    roles_path    = /root/ansible_playbook/roles
-    host_key_checking = False
-    timeout = 20
-    log_path = /var/log/ansible.log
-    [privilege_escalation]
-    [paramiko_connection]
-    [ssh_connection]
-    [accelerate]
-    [selinux]
-    [colors]
+[defaults]
+# some basic default values...
+hostfile = /etc/ansible/hosts \\指定默认hosts配置的位置
+# library_path = /usr/share/my_modules/
+remote_tmp = $HOME/.ansible/tmp
+pattern = *
+forks = 5
+poll_interval = 15
+sudo_user = root \\远程sudo用户
+#ask_sudo_pass = True \\每次执行ansible命令是否询问ssh密码
+#ask_pass = True \\每次执行ansible命令时是否询问sudo密码
+transport = smart
+remote_port = 22
+module_lang = C
+gathering = implicit
+host_key_checking = False \\关闭第一次使用ansible连接客户端是输入命令提示
+log_path = /var/log/ansible.log \\需要时可以自行添加。chown -R root:root ansible.log
+system_warnings = False \\关闭运行ansible时系统的提示信息，一般为提示升级
+# set plugin path directories here, separate with colons
+action_plugins = /usr/share/ansible_plugins/action_plugins
+callback_plugins = /usr/share/ansible_plugins/callback_plugins
+connection_plugins = /usr/share/ansible_plugins/connection_plugins
+lookup_plugins = /usr/share/ansible_plugins/lookup_plugins
+vars_plugins = /usr/share/ansible_plugins/vars_plugins
+filter_plugins = /usr/share/ansible_plugins/filter_plugins
+fact_caching = memory
+[accelerate]
+accelerate_port = 5099
+accelerate_timeout = 30
+accelerate_connect_timeout = 5.0
+# The daemon timeout is measured in minutes. This time is measured
+# from the last activity to the accelerate daemon.
+accelerate_daemon_timeout = 30
 
 ansible的配置文件：
   /etc/ansible/
