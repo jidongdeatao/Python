@@ -122,5 +122,5 @@ ansible_ssh_user=root  ansible_ssh_private_key_file=/home/ssh_keys/id_rsa
             $ ./configure 
             $ sudo make install 
 
-这些配置
-完成
+这些配置完成后，可以使用命令来进行验证：
+    ansible test -m ping
