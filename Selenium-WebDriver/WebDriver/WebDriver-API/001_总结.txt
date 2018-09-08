@@ -1,3 +1,5 @@
+这个总结适合于python2，针对python3进行练习的时候要稍微有些变动
+
 from selenium import webdriver
 driver = webdriver.Ie(executable_path = "e:\\IEDriverServer")  #打开浏览器
 driver.get("http://wenku.baidu.com") #输入网址
