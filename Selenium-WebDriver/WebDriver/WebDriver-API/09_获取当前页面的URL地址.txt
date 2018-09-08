@@ -1,1 +1,2 @@
 
+print(driver.current_url)
