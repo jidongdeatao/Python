@@ -6,6 +6,38 @@ ansible的官方文档：
 https://docs.ansible.com/
 
 
+ansible的基本使用
+ansible <pattern_hosts> -m <module_name> -a <arguments>
+1.远程命令模块
+command      //远程执行shell命令
+scripts           //scp + shell
+shell             //执行远程主机的shell脚本
+eg:
+ansible webserver -m command -a "uptime"
+2.copy模块
+ansible webserver -m copy -a "src=  dest=  owner=  group= mode= "
+3.stat模块
+4.get_url
+5.yum模块
+ansible webserver -m yum -a "name=    state= "
+ansible webserver -m apt -a "name=    state= "
+6.cron
+ansible webserver -m cron -a "name='check dirs' hour='5.2'  job='ls -alh > /dev/null'"
+7.mount
+ansible webserver -m mount -a "name=/mnt src=/dev/sdb fstype=ext4 opts=ro state=present"
+8.service
+ansible webserver -m service -a "name=httpd state=stopped"
+9.sysctl
+10.user
+ansible webserver -m user -a "name=dayuan comment='dayuanhello'"            //添加用户
+ansible webserver -m user -a "name=dayuan state=absent removes=yes"       //删除用户
+
+
+
+
+
+
+
 Ansible 默认通过 SSH 协议进行管理。同时 Ansible 是基于 python 的一个模块（paramiko）开发的，遵循 SSH 协议，
 支持加密和认证的方式来进行远程服务器连接，因此 Ansible 不需要客户端和服务端。
 Ansible 可以通过命令来简单执行一些任务，也可以通过 palybook的配置脚本来执行复杂任务，同时 playbook不用分发到远程，在本地就可以执行。
