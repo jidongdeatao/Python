@@ -28,7 +28,7 @@ Lookup plugins
 Lookup plugins 可以用于从外部数据存储中获取数据。
 下面用一个简单的例子来是实现查找插件的功能，需求是查找并返回一个文本文件的内容来作为变量。
 首先，创建一个文本文件
-$ sudo vim lookup.txt
+$ sudo vim lookup.txt.# 里面可以输入一些内容
 然后，创建查找的插件 py 文件。
 $ sudo vim lookup.py
 
@@ -71,7 +71,7 @@ $ sudo vim lookup.yaml
 ---
 - hosts: all
   vars:
-     contents: "{{ lookup('file', '/home/shiyanlou/lookup.txt') }}"
+     contents: "{{ lookup('file', '/home/lookup.txt') }}"
 
   tasks:
 
