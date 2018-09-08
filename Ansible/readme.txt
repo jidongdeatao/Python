@@ -2,6 +2,10 @@ Ansible
 GitHub地址；
 https://github.com/ansible/ansible
 
+ansible的官方文档：
+https://docs.ansible.com/
+
+
 Ansible 默认通过 SSH 协议进行管理。同时 Ansible 是基于 python 的一个模块（paramiko）开发的，遵循 SSH 协议，
 支持加密和认证的方式来进行远程服务器连接，因此 Ansible 不需要客户端和服务端。
 Ansible 可以通过命令来简单执行一些任务，也可以通过 palybook的配置脚本来执行复杂任务，同时 playbook不用分发到远程，在本地就可以执行。
