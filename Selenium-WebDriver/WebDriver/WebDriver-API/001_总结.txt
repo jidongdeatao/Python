@@ -50,7 +50,6 @@ AssertionError
 driver.page_source() #获取网页源码，返回的其实是unicode字符串
 
 #抓取页面源码时，webdriver可以触犯页面上的js动态数据，但是它的缺点是比较慢；之前讲过的
-
 #request抓取源码快，但只适用于静态页面，无法抓取js的动态页面内容
 #抓取源码是非常重要的，可以随意操作
 
@@ -58,12 +57,11 @@ driver.page_source() #获取网页源码，返回的其实是unicode字符串
 driver = webdriver.Ie(executable_path = "e:\\IEDriverServer")
 driver.get("http://www.iciba.com")
 driver.page_source[:50] #获取第50行的页面源码
-u'<html><head><style></style><avalon class="avalonHi'
 u"热门词汇" in driver.page_source #判断指定字段是不是在页面源码中存在
 True
 
+这里python2与python3有很大的不同，python3就不要这种操作
 driver.page_source.encode("gbk","ignore") #将页面源码转码成中文，加ignore避免无法识别的生僻字报错
-
 html=driver.page_source.encode("gbk","ignore") #将页面源码转成html文件
 >>> with open("e:\\1.html","w"):
 ...     pass
