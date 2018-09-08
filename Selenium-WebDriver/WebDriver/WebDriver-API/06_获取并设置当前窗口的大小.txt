@@ -1,1 +1,2 @@
 
+driver.set_window_size(480,800)　　#浏览器宽480，高800显示
