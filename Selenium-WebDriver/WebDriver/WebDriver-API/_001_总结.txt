@@ -1,0 +1,74 @@
+from selenium import webdriver
+driver = webdriver.Ie(executable_path = "e:\\IEDriverServer")  #打开浏览器
+driver.get("http://wenku.baidu.com") #输入网址
+driver.back() #向后退
+driver.forward() #向前进
+driver.refresh()  #刷新页面
+
+driver.set_page_load_timeout(2) #设置超时等待的时间，超过不再等待
+
+ try:   #捕获超时异常
+    driver.get("http://www.sohu.com")
+... except Exception,e:
+...     print e
+...
+Message: Timed out waiting for page to load.
+
+driver.maximize_window() #窗口最大化
+
+driver.get_window_position() #获取坐标位置
+{'y': -8, 'x': 1672}
+
+driver.name  #判断使用的浏览器
+u'internet explorer'
+
+driver.set_window_position(y=200, x=400) #设置浏览器坐标
+#y:指的上下走，屏幕最顶部y=0 ；x：指的左右走 ，最左边x=0，不再当前屏幕的会出现负数
+#浏览器最大化的状态再去设置坐标就不起作用了
+
+driver.get_window_position()['x'] #获取x轴的位置
+driver.get_window_position()['y'] #获取y轴的位置
+
+
+driver.get_window_size() #获取浏览器的窗体大小
+{'width': 160, 'height': 32}
+driver.get_window_size()['width'] #获取浏览器的宽度
+driver.get_window_size()['height'] #获取浏览器的高度
+driver.set_window_size(100,200) #设置浏览器的窗体大小
+
+print driver.title #获取页面title，可以用于做断言看打开的页面对不对
+搜狐
+
+assert u"搜狐" == driver.title  #断言标题是否正确
+assert u"搜狐2" == driver.title #断言标题出错
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AssertionError
+
+driver.page_source() #获取网页源码，返回的其实是unicode字符串
+
+#抓取页面源码时，webdriver可以触犯页面上的js动态数据，但是它的缺点是比较慢；之前讲过的
+
+#request抓取源码快，但只适用于静态页面，无法抓取js的动态页面内容
+#抓取源码是非常重要的，可以随意操作
+
+
+driver = webdriver.Ie(executable_path = "e:\\IEDriverServer")
+driver.get("http://www.iciba.com")
+driver.page_source[:50] #获取第50行的页面源码
+u'<html><head><style></style><avalon class="avalonHi'
+u"热门词汇" in driver.page_source #判断指定字段是不是在页面源码中存在
+True
+
+driver.page_source.encode("gbk","ignore") #将页面源码转码成中文，加ignore避免无法识别的生僻字报错
+
+html=driver.page_source.encode("gbk","ignore") #将页面源码转成html文件
+>>> with open("e:\\1.html","w"):
+...     pass
+...
+>>> with open("e:\\1.html","w") as fp:
+...     fp.write(html)
+...
+
+driver.current_url  #获取当前页面的url
+u'http://www.iciba.com/
