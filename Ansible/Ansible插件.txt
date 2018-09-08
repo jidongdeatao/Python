@@ -1,0 +1,82 @@
+这里我们举两个插件的用法为例，其他的插件大家可以下来研究。
+
+Callback plugins
+前面我们通过模块就可以解决详尽显示出执行后的信息的问题，同样我们也可以通过这个 Callback 插件来帮助我们显示信息。
+这个插件在 GitHub 中是公开的，我们可以直接 git 下载下来。
+$ git clone https://github.com/n0ts/ansible-human_log.git
+然后将这个文件放置在预定义的插件位置（/usr/share/ansible/plugins/callback），这里默认没有创建这个文件夹，需要我们自行创建。
+$ sudo mkdir -p /usr/share/ansible/plugins/callback
+$ sudo mv /home/shiyanlou/ansible-human_log/human_log.py /usr/share/ansible/plugins/callback/human_log.py
+
+这里我们看到会涉及到了 .py 文件，这是因为在 Ansible 的使用中是通过 Python API 来管理节点，再通过扩展 Ansible 来响应 python 事件，同时也可以通过相应插件（plugins）来调取数据源。
+
+这里我们 git 下来的 human_log.py 文件正是插件使用的一个 python API。可以用 cat 命令来查看下里面的内容。
+
+内容较多，大家可以自行阅读。
+
+然后，我们就可以再次执行之前的 playbook 即可。
+
+$ ansible-playbook testdebug.yaml
+
+从输出的结果可以看到更多的信息在结果中的返回，从 human 的源代码中还可以了解到插件会把信息进行如下的分类：
+
+# Fields to reformat output for
+FIELDS = ['cmd', 'command', 'start', 'end', 'delta', 'msg', 'stdout','stderr', 'results']
+但是也可以看出并不是所有情况都会有详细的信息输出，也就是说明 python 的插件也不是最完美的，不过 Ansile 宣称能够接受任何语言的模块或插件，所以像 C、shell 等只要能够达到需求的语言都可以用来编写一个插件。
+
+Lookup plugins
+Lookup plugins 可以用于从外部数据存储中获取数据。
+下面用一个简单的例子来是实现查找插件的功能，需求是查找并返回一个文本文件的内容来作为变量。
+首先，创建一个文本文件
+$ sudo vim lookup.txt
+然后，创建查找的插件 py 文件。
+$ sudo vim lookup.py
+
+from ansible.errors import AnsibleError, AnsibleParserError
+from ansible.plugins.lookup import LookupBase
+
+try:
+    from __main__ import display
+except ImportError:
+    from ansible.utils.display import Display
+    display = Display()
+
+
+class LookupModule(LookupBase):
+
+    def run(self, terms, variables=None, **kwargs):
+
+        ret = []
+
+        for term in terms:
+            display.debug("File lookup term: %s" % term)
+
+            # Find the file in the expected search path
+            lookupfile = self.find_file_in_search_path(variables, 'files', term)
+            display.vvvv(u"File lookup using %s as file" % lookupfile)
+            try:
+                if lookupfile:
+                    contents, show_data = self._loader._get_file_contents(lookupfile)
+                    ret.append(contents.rstrip())
+                else:
+                    raise AnsibleParserError()
+            except AnsibleParserError:
+                raise AnsibleError("could not locate file in lookup: %s" % term)
+
+        return ret
+
+接着就是创建一个 playbook 文件。
+$ sudo vim lookup.yaml
+
+---
+- hosts: all
+  vars:
+     contents: "{{ lookup('file', '/home/shiyanlou/lookup.txt') }}"
+
+  tasks:
+
+     - debug: msg="the value of lookup.txt is {{ contents }} as seen today {{ lookup('pipe', 'date +"%Y-%m-%d"') }}"
+
+最后执行命令即可看到返回信息。
+
+$ ansible-playbook lookup.yaml
