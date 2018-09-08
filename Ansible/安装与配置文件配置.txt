@@ -122,4 +122,5 @@ ansible_ssh_user=root  ansible_ssh_private_key_file=/home/ssh_keys/id_rsa
             $ ./configure 
             $ sudo make install 
 
-格式为：别名+ssh用户+ssh密钥
+这些配置
+完成
