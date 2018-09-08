@@ -1,3 +1,0 @@
-Selenium+phantomJS爬虫工具
-
-其可以融入进Scrapy框架
