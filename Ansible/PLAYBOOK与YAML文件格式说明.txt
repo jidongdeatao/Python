@@ -1,0 +1,94 @@
+YAML 格式说明
+    文件均以 --- 作为开始，以 ... 结束。
+    列表中同级别的项使用相同缩进以及短横线加空格（-）开始。
+    字典（dictionary）用 key: value 的简单形式表示，其中冒号后面必须有个空格。value 部分可以用几种形式（yes/no/true/false）来指定布尔值。
+    换行符：value 部分还可以使用 | 或 >，使用 | 可以将内容进行分行处理，而使用 > 将忽略换行符，任何情况下缩进都会被忽略。
+    语句过长可以使用 "" 括起来，例如：foo: "somebody said I should put a colon here: so I did"。
+如下一个简单的示例大家可以初步认识下 YAML 的语法格式：
+
+---
+Name: Linux louplus
+Label：Linux
+Start: True
+Courses:
+    - linux
+    - Bash
+    - python
+    - MySQL
+    - Ansible
+Describe: |
+    100 lab
+    12 weeks
+    50 challenges
+...
+
+
+PLAYBOOK示例：
+
+1.Ubantu安装 Apache2 服务的一个简单脚本：
+    #!/bin/bash
+    # install apache2
+    apt-get install apache2
+    # start-up apache
+    service apache2 start
+  转化为playbook 的 yaml文件
+---
+ - hosts: test
+   sudo: yes
+
+   tasks:
+       - name: "Install Apache"
+         apt:
+             name: apache2
+            state: present
+       - name: "Startup Apache"
+          service:
+              name: apache2
+              state: started
+              enabled: yes
+...
+
+这个文件命名为test_apache.yaml,然后命令执行：$ ansible-playbook test_apache.yaml
+
+2.docker 安装的 playbook
+---
+- hosts: test # 对 test 组执行下面的任务
+  sudo: yes  # 下面的任务将有 sudo 的执行权限
+  vars:      # 定义一个变量，安装多个包，以免增加多个类似的代码
+      apt_packages_ca:
+         - apt-transport-https
+         - ca-certificates
+
+  tasks:    # 定义任务列表
+
+    - name: add docker source list file for  install docker
+      file:
+          path: /etc/apt/sources.list.d/docker.list
+          state: touch
+          owner: root
+          mode: 'u+r,g+rw'
+
+    - name: write deb url of docker to docker.list
+      blockinfile:
+          dest: /etc/apt/sources.list.d/docker.list
+          marker: ""
+          block: |
+            deb https://apt.dockerproject.org/repo ubuntu-trusty main
+
+    - name: add CA certificates and ensure installed
+      apt:
+          name: "{{ item }}"
+          update_cache: yes
+      with_items: "{{ apt_packages_ca }}"
+
+    - name: add apt-key of dockers
+      apt_key:
+          keyserver: p80.pool.sks-keyservers.net
+          id: 58118E89F3A912897C070ADBF76221572C52609D
+
+    - name: install docker-engine
+      apt:
+          name: docker-engine
+          state: latest
+          force: yes
+...
