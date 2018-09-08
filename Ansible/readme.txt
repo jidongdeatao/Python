@@ -5,32 +5,19 @@ https://github.com/ansible/ansible
 ansible的官方文档：
 https://docs.ansible.com/
 
-
+请先从安装和配置文件.txt开始看起：
+   如何添加一台机器？
+   1、添加主机到/etc/ansible/hosts
+   2、添加本机的公钥到目标机器
+   3、添加本机的私钥到ansible
+   4、运行ansible all -m ping测试是否添加成功
 ansible的基本使用
-ansible <pattern_hosts> -m <module_name> -a <arguments>
-1.远程命令模块
-command      //远程执行shell命令
-scripts           //scp + shell
-shell             //执行远程主机的shell脚本
-eg:
-ansible webserver -m command -a "uptime"
-2.copy模块
-ansible webserver -m copy -a "src=  dest=  owner=  group= mode= "
-3.stat模块
-4.get_url
-5.yum模块
-ansible webserver -m yum -a "name=    state= "
-ansible webserver -m apt -a "name=    state= "
-6.cron
-ansible webserver -m cron -a "name='check dirs' hour='5.2'  job='ls -alh > /dev/null'"
-7.mount
-ansible webserver -m mount -a "name=/mnt src=/dev/sdb fstype=ext4 opts=ro state=present"
-8.service
-ansible webserver -m service -a "name=httpd state=stopped"
-9.sysctl
-10.user
-ansible webserver -m user -a "name=dayuan comment='dayuanhello'"            //添加用户
-ansible webserver -m user -a "name=dayuan state=absent removes=yes"       //删除用户
+
+      ad-hoc ：临时命令，是在输入内容后，快速执行某些操作，但不希望保存下来的命令。
+        一般来说，Ansible 主要在于我们后面会学到的 playbook 的脚本编写，但是，ad-hoc 相较来说，它的优势在于当你收到一个临时任务时，
+        你只用快速简单的执行一个 ad-hoc 临时命令，而不用去编写一个完整的 playbook 脚本就可以了。
+        类似于这种命令$ ansible all -m ping被称为ad-hoc 命令。
+
 
 
 
