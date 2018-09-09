@@ -33,7 +33,8 @@ class WebsiteUser(HttpLocust):
 
 上述代码解释：
     UserBehavior类继承TaskSet类，用于描述用户行为。
-    baidu_index() 方法表示一个用户为行，访问百度首页。使用@task装饰该方法为一个事务。client.get()用于指请求的路径“/”，因为是百度首页，所以指定为根路径。
+    baidu_index() 方法表示一个用户为行，访问百度首页。使用@task装饰该方法为一个事务。client.get()用于指请求的路径“/”，
+    因为是百度首页，所以指定为根路径。
     WebsiteUser类用于设置性能测试。
         task_set ：指向一个定义的用户行为类。
         min_wait ：执行事务之间用户等待时间的下界（单位：毫秒）。
@@ -46,6 +47,8 @@ class WebsiteUser(HttpLocust):
     –host 指定被测试应用的URL的地址，注意访问百度使用的HTTPS协议。
 
 通过浏览器访问：http://localhost:8089（Locust启动网络监控器，默认为端口号为: 8089）设置测试：
+    在Number of users to simulate输入框中输入10
+    在Hatch rate输入框中输入2
     Number of users to simulate 设置模拟用户数。
     Hatch rate（users spawned/second） 每秒产生（启动）的虚拟用户数。
     点击 “Start swarming” 按钮，开始运行性能测试。
@@ -62,6 +65,13 @@ class WebsiteUser(HttpLocust):
     reqs/sec：是每秒钟请求的个数。
 
 Locust no-web模式：
-    对
+    对刚才那个脚本，使用no-web模式运行
     > locust -f load_test.py --host=https://www.baidu.com --no-web -c 10 -r 2 -t 1m
-  
+    启动参数含义：
+    –no-web 表示不使用Web界面运行测试。
+    -c 设置虚拟用户数。
+    -r 设置每秒启动虚拟用户数。
+    -t 设置设置运行时间。
+
+
+
