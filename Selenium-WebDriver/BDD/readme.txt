@@ -16,3 +16,8 @@ lettuce使用Gherkin语言来描述测试功能、测试场景、测试步骤和
   转化为中文关联词为，“场景”“如果”“当”“那么”
 测试人员使用Gherkin语言编写号测试场景的每个执行步骤，lettuce就会一步一步的接近关键词右侧的自然语言并自信相应的代码。
 
+
+
+了解BDD lettuce最通俗易懂的文章，来自虫师博客：
+https://www.cnblogs.com/fnng/p/3415609.html
+或者参考 easyExample.txt
