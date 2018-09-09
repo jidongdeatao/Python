@@ -8,6 +8,9 @@ https://pythonhosted.org/lettuce/
 GitHub：
 https://github.com/gabrielfalcao/lettuce
 
+官方的教程：
+https://pythonhosted.org/lettuce/tutorial/simple.html#tutorial-simple
+
 lettuce是实现BDD开发模式的一种测试框架，实现了使用自然语言来执行相关联测试的大门的需求。
 lettuce使用Gherkin语言来描述测试功能、测试场景、测试步骤和测试结果
   Gherkin使用的注意英文关键词有Scenario、Given、When、And、Then、But等
