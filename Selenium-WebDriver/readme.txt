@@ -2,43 +2,10 @@ Python-Selenium
 UI自动化测试
 官网：http://selenium-python.readthedocs.io/
 
-安装浏览器驱动；
-Linux 和 MacOS 用户下载好之后, 请将下载好的”geckodriver”文件放在你的计算机的 “/usr/bin” 或 “/usr/local/bin” 目录. 并赋予执行权限, 不会放的, 请使用这条语句.
-
-sudo cp 你的geckodriver位置 /usr/local/bin
-sudo chmod +x /usr/local/bin/geckodriver
-
-
-暂时只有火狐上有这个插件. 插件 Katalon Recorder，是可以通过录制操作过程转化为python形式
+自动化测试框架搭建：
+  1.数据驱动自动化测试框架
+  2.关键字驱动自动化测试框架
+  3.行为驱动自动化测试框架（利用lettuce库）
 
 
 
-
-
-
-Issues1-解决不安全连接的方法.txt
-一、selenium+python+firefox解决不安全连接的方法
-
-  1.firefox创建用户profile
-        firefox.exe -p创建用户profile
-  2.在1创建的用户profile中将需要访问的站点设置为信任
-  3.selenium启动浏览器时设置启动1创建的用户profile
-        代码如下：
-        #coding=utf_8
-        from selenium import webdriver
-        from time import time,sleep
-        #指定配置文件地址
-        profile_directory = r"C:\Users\zhouj\AppData\Roaming\Mozilla\Firefox\Profiles\oj9vd1gi.zj_selenium_test"
-        #加载配置
-        profile = webdriver.FirefoxProfile(profile_directory)
-        #启动浏览器配置
-        br=webdriver.Firefox(profile)
-        br.get("https://192.168.211.218")
-
-        br.find_element_by_id("username").send_keys("superadmin")
-        br.find_element_by_id("password").send_keys("p@ssw0rd")
-
-        sleep(2)
-        br.find_element_by_class_name("s-button").click()
-        url=br.current_url
-        print (url)
