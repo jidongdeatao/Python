@@ -49,30 +49,31 @@ Feature: Compute factorial
     Given I have the number 0
     When I compute its factorial
     Then I see the number 1
- 基于E文不好的同学，我这里简单翻译一下：
-功能：计算阶乘
-   为了使用lettuce
-   作为初学者
-   我们将实现阶乘
-   
-   场景：0的阶乘
-      假定我有数字0
-      当我计算它的阶乘
-      然后，我看到了1
-   
-  　　是不是很自然的描述？！第一段功能介绍，我要实现什么功能；第二段场景，也可以看做是一条测试用例，当我输入什么数据时，程序应该返回给我什么数据。
-   　 虽然是自然语言，但还是有语法规则的，不然一千个人有一千中描述，程序以什么样的规则去匹配呢？
-      其实它的语法规则非常简单就几个关键字，记住他们的含义及作用即可。
-----------------------------------------------
-    Feature（功能）
-    Scenario（情景）
-    Given（给定）
-    And（和）
-    When（当）
-    Then（则）
-----------------------------------------------
-他们的含义与原有自动化测试框架的概念相似，类比如下：
-关于feature文件的作用，执行以及语法规则将在下一节中详细介绍，这一节主要先来体验luttuce的风骚。
+       基于E文不好的同学，我这里简单翻译一下：
+      功能：计算阶乘
+         为了使用lettuce
+         作为初学者
+         我们将实现阶乘
+
+         场景：0的阶乘
+            假定我有数字0
+            当我计算它的阶乘
+            然后，我看到了1
+
+          是不是很自然的描述？！第一段功能介绍，我要实现什么功能；第二段场景，也可以看做是一条测试用例，当我输入什么数据时，
+          程序应该返回给我什么数据。
+           虽然是自然语言，但还是有语法规则的，不然一千个人有一千中描述，程序以什么样的规则去匹配呢？
+            其实它的语法规则非常简单就几个关键字，记住他们的含义及作用即可。
+      ----------------------------------------------
+          Feature（功能）
+          Scenario（情景）
+          Given（给定）
+          And（和）
+          When（当）
+          Then（则）
+      ----------------------------------------------
+      他们的含义与原有自动化测试框架的概念相似，类比如下：
+      关于feature文件的作用，执行以及语法规则将在下一节中详细介绍，这一节主要先来体验luttuce的风骚。
  
 有了上面zero.feature文件的行为做指导，下面打开steps.py 文件来编写我们的程序。
 from lettuce import *
@@ -93,62 +94,62 @@ def factorial(number):
         return 1
     else:
         return number
- 　　我擦！咋一看怎么跟我上面实现阶乘的代码相差甚远呀！不知道你和你的小伙伴有没有惊呆！？好吧，以我拙劣的python语言水平试着来分析一下，这是啥？这是啥？这又是啥？
+ 　　我擦！咋一看怎么跟我上面实现阶乘的代码相差甚远呀！不知道你和你的小伙伴有没有惊呆！？
+    好吧，以我拙劣的python语言水平试着来分析一下，这是啥？这是啥？这又是啥？
  
-from lettuce import *
-引入lettuce 下面的所有包
- 
-@step('I have the number (\d+)')
-@step 字面意思是步骤
-I have the number (\d+) 对应的就是zero.feature文件中的第六句：Given I have the number 0 
-(\d+) 是一个正则表达式，\d 表示匹配一个数字，+ 表示匹配的数字至少有一个或多个。关于这个可以参考其他python 正则表达式的资料。
- 
-第一步：
-@step('I have the number (\d+)')
-def have_the_number(step, number):
-    world.number = int(number)
-定义一个方法have_the_number，把假设的输入（0）转换成整型放入world.number中。
- 
-第二步：
-@step('I compute its factorial')
-def compute_its_fatorial(step):
-    world.number = factorial(world.number)
-把have_the_number方法中world.number的变量值（0）放入 factorial() 方法中，并把结果返再赋值给world.number变量。
-I compute its factorial  对应的就是zero.feature文件中的第七句：When I compute its factorial
- 
-第三步：
-def factorial(number):
-    number = int(number)
-    if (number == 0) or (number == 1):
-        return 1
-    else:
-       return number
- 这个是factorial()方法被调用时的处理过程，对参数的内容转换成整数，判断如果等于0或1的话就直接返回1，否则返回具体的数。（处理结果给了第三步的world.number）
- 
-第四步：
-@step('I see the number (\d+)')
-def check_number(step, expected):
-    expected = int(expected)
-    assert world.number == expected, \
-        "Got %d" % world.number
-expected 获取的是zero.feature文件中预期结果， 与第三步处理的实际结果（world.number）进行比较；assert 函数进行断言结果是否正确。
-I see the number (\d+)对应的就是zero.feature文件中的第八句：Then I see the number 1
+    from lettuce import *
+    引入lettuce 下面的所有包
+
+    @step('I have the number (\d+)')
+    @step 字面意思是步骤
+    I have the number (\d+) 对应的就是zero.feature文件中的第六句：Given I have the number 0 
+    (\d+) 是一个正则表达式，\d 表示匹配一个数字，+ 表示匹配的数字至少有一个或多个。关于这个可以参考其他python 正则表达式的资料。
+
+    第一步：
+    @step('I have the number (\d+)')
+    def have_the_number(step, number):
+        world.number = int(number)
+    定义一个方法have_the_number，把假设的输入（0）转换成整型放入world.number中。
+
+    第二步：
+    @step('I compute its factorial')
+    def compute_its_fatorial(step):
+        world.number = factorial(world.number)
+    把have_the_number方法中world.number的变量值（0）放入 factorial() 方法中，并把结果返再赋值给world.number变量。
+    I compute its factorial  对应的就是zero.feature文件中的第七句：When I compute its factorial
+
+    第三步：
+    def factorial(number):
+        number = int(number)
+        if (number == 0) or (number == 1):
+            return 1
+        else:
+           return number
+     这个是factorial()方法被调用时的处理过程，对参数的内容转换成整数，判断如果等于0或1的话就直接返回1，否则返回具体的数。
+     （处理结果给了第三步的world.number）
+
+    第四步：
+    @step('I see the number (\d+)')
+    def check_number(step, expected):
+        expected = int(expected)
+        assert world.number == expected, \
+            "Got %d" % world.number
+    expected 获取的是zero.feature文件中预期结果， 与第三步处理的实际结果（world.number）进行比较；assert 函数进行断言结果是否正确。
+    I see the number (\d+)对应的就是zero.feature文件中的第八句：Then I see the number 1
  
  
 运行                                                                                                        
- 
 切换到tests目录下，运行lettuce 命令：
-fnngj@fnngj-H24X:~/python/lettuce/tests$ lettuce
-运行结果如下：
-运行结果很清晰，首先是zero.feature文件里功能描述（feature），然后场景（scenario）每一步所对应steps.py 文件里的哪一行代码。
-最后给出运行结果：
-Feature(1 passed)   一个功能通过
-Scenario(1 passed)   一个场景通过
-Steps(3 passed)      三个步骤通过
- 
+    fnngj@fnngj-H24X:~/python/lettuce/tests$ lettuce
+    运行结果如下：
+    运行结果很清晰，首先是zero.feature文件里功能描述（feature），然后场景（scenario）每一步所对应steps.py 文件里的哪一行代码。
+    最后给出运行结果：
+    Feature(1 passed)   一个功能通过
+    Scenario(1 passed)   一个场景通过
+    Steps(3 passed)      三个步骤通过
+
  
 完善                                                                                                         
- 
 下面我们可以在zero.feature 中多加几个场景（测试用例）：
 Feature: Compute factorial
   In order to play with Lettuce
@@ -203,3 +204,4 @@ def factorial(number):
     else:
         return number*factorial(number-1)
 参照本文开头，通过递归的方式实现阶乘的代码，现在才算完整的实现阶乘。OK ！再来运行以下脚本吧！全绿了有木有！！
+最通俗易懂理解 lettuce用法的示例。
