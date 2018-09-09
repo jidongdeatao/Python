@@ -62,5 +62,6 @@ class WebsiteUser(HttpLocust):
     reqs/sec：是每秒钟请求的个数。
 
 Locust no-web模式：
-
+    对
+    > locust -f load_test.py --host=https://www.baidu.com --no-web -c 10 -r 2 -t 1m
   
