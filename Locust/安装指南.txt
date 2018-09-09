@@ -1,0 +1,20 @@
+安装：
+  方式一：pip install locust
+  方式二：GitHub下载安装
+  GitHub项目地址：https://github.com/locustio/locust/
+  将项目克隆下来，通过Python 执行 setup.py 文件
+检查是否安装成功。打开命令提示符，输入 “locust –help” 回车。
+
+
+安装依赖分析：
+打开 Locust 安装目录下的 setup.py 文件。查看安装要求：
+install_requires=[“gevent>=1.1.2”, “flask>=0.10.1”, “requests>=2.9.1”, “msgpack-python>=0.4.2”, “six>=1.10.0”, “pyzmq==15.2.0”]
+      gevent 是在 Python 中实现协程的一个第三方库。协程，又称微线程（Coroutine）。使用gevent可以获得极高的并发性能。
+      flask 是 Python 的一个 Web 开发框架。
+      Requests 用来做 HTTP 接口测试。
+      msgpack-python 是一种快速、紧凑的二进制序列化格式，适用于类似JSON的数据。
+      six 提供了一些简单的工具用来封装 Python2 和 Python3 之间的差异性。
+      pyzmq 如果你打算运行 Locust 分布在多个进程/机器，建议你安装pyzmq。
+  当我们在安装 Locust 时，它会检测我们当前的 Python 环境是否已经安装了这些库，如果没有安装，
+  它会先把这些库一一装上。并且对这些库版本有要求，有些是必须等于某版本，有些是大于某版本。
+  我们也可以事先把这些库全部按要求装好，再安装Locust时就会快上许多。
