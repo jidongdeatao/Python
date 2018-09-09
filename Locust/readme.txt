@@ -7,6 +7,8 @@ GitHub：https://github.com/locustio/locust
 官方文档：
 https://docs.locust.io/en/stable/
 
+locust参数说明：
+    详见参数说明.txt
 介绍
     Locust 完全基本 Python 编程语言，采用 Pure Python 描述测试脚本，并且 HTTP 请求完全基于 Requests 库。
     除了 HTTP/HTTPS 协议，Locust 也可以测试其它协议的系统，只需要采用Python调用对应的库进行请求描述即可。
