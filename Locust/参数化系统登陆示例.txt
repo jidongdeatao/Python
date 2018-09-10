@@ -1,0 +1,33 @@
+使用 LoadRunner 和 JMeter 的同学都知道，性能测试工具设置参数化颇为麻烦，但对于 Python 来说，生成点数据再简单不过了。
+参数化系统登录
+
+这里以某系统登录为例，简单介绍登录用户名密码的参数化实现
+
+from locust import HttpLocust, TaskSet, task
+from random import randint
+
+# Web性能测试
+class UserBehavior(TaskSet):
+    def on_start(self):
+        self.login()
+
+    # 随机返回登录用户
+    def login_user():
+        users = {"user1":123456,"user2":123123,"user3":111222}
+        data = randint(1, 3)
+        username = "user"+str(data)
+        password = users[username]
+        return username, password
+
+    @task
+    def login(self):
+        username, password = login_user()
+        self.client.post("/login_action", {"username":username, "password":password})
+class User(HttpLocust):
+    task_set = UserTask
+    min_wait = 1000
+    max_wait = 3000
+    host = "http://www.xxx.com"
+
+创建 login_user() 方法，定义登录字典 users , 通过randint 随机获取字典中的用户数据。
+在 login() 登录任务中，调用 login_user() 方法实现 随机用户的登录。
