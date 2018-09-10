@@ -1,0 +1,28 @@
+参数说明：
+参数 	说明
+-h, –help 	查看帮助
+-H HOST, –host=HOST 	指定被测试的主机，采用以格式：http://10.21.32.33
+–web-host=WEB_HOST 	指定运行 Locust Web 页面的主机，默认为空 “。
+-P PORT, –port=PORT, –web-port=PORT 	指定 –web-host 的端口，默认是8089
+-f LOCUSTFILE, –locustfile=LOCUSTFILE 	指定运行 Locust 性能测试文件，默认为: locustfile.py
+–csv=CSVFILEBASE, –csv-base-name=CSVFILEBASE 	以CSV格式存储当前请求测试数据。
+–master 	Locust 分布式模式使用，当前节点为 master 节点。
+–slave 	Locust 分布式模式使用，当前节点为 slave 节点。
+–master-host=MASTER_HOST 	分布式模式运行，设置 master 节点的主机或 IP 地址，只在与 –slave 节点一起运行时使用，默认为：127.0.0.1.
+–master-port=MASTER_PORT 	分布式模式运行， 设置 master 节点的端口号，只在与 –slave 节点一起运行时使用，默认为：5557。注意，slave 节点也将连接到这个端口+1 上的 master 节点。
+–master-bind-host=MASTER_BIND_HOST 	Interfaces (hostname, ip) that locust master should bind to. Only used when running with –master. Defaults to * (all available interfaces).
+–master-bind-port=MASTER_BIND_PORT 	Port that locust master should bind to. Only used when running with –master. Defaults to 5557. Note that Locust will also use this port + 1, so by default the master node will bind to 5557 and 5558.
+–expect-slaves=EXPECT_SLAVES 	How many slaves master should expect to connect before starting the test (only when –no-web used).
+–no-web 	no-web 模式运行测试，需要 -c 和 -r 配合使用.
+-c NUM_CLIENTS, –clients=NUM_CLIENTS 	指定并发用户数，作用于 –no-web 模式。
+-r HATCH_RATE, –hatch-rate=HATCH_RATE 	指定每秒启动的用户数，作用于 –no-web 模式。
+-t RUN_TIME, –run-time=RUN_TIME 	设置运行时间, 例如： (300s, 20m, 3h, 1h30m). 作用于 –no-web 模式。
+-L LOGLEVEL, –loglevel=LOGLEVEL 	选择 log 级别（DEBUG/INFO/WARNING/ERROR/CRITICAL）. 默认是 INFO.
+–logfile=LOGFILE 	日志文件路径。如果没有设置，日志将去 stdout/stderr
+–print-stats 	在控制台中打印数据
+–only-summary 	只打印摘要统计
+–no-reset-stats 	Do not reset statistics once hatching has been completed。
+-l, –list 	显示测试类, 配置 -f 参数使用
+–show-task-ratio 	打印 locust 测试类的任务执行比例，配合 -f 参数使用.
+–show-task-ratio-json 	以 json 格式打印 locust 测试类的任务执行比例，配合 -f 参数使用.
+-V, –version 	查看当前 Locust 工具的版本.
