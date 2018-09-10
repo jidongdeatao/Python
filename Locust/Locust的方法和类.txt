@@ -57,14 +57,13 @@ class UserTask(TaskSet):
 class User(HttpLocust):
     task_set = UserTask
     host = "https://www.baidu.com"
-    on_start()：
-定义每个 Locust 用户开始做的第一件事。
-    @task
-通过@task()装饰的方法为一个事务。方法的参数用于指定该行为的执行权重。参数越大每次被虚拟用户执行的概率越高。如果不设置默认为1。
-    interrupt(reschedule=True)
-顶层的TaskSet（即被绑定到某个Locust类的task_set的第一层TaskSet）不能调用这个方法。reschedule置为True时，从被嵌套任务出来马上选择新任务执行，如果置为False，从被嵌套任务出来后，随机等待min_wait和max_wait之间的一段时间，再选择新任务执行。
-    tasks 属性
-tasks = {stay:2} 表示每个用户执行 stay 的频率是2，也就的 UserTask 的两倍。
+ 
+参数说明：
+    on_start()：定义每个 Locust 用户开始做的第一件事。
+    @task  通过@task()装饰的方法为一个事务。方法的参数用于指定该行为的执行权重。参数越大每次被虚拟用户执行的概率越高。如果不设置默认为1。
+    interrupt(reschedule=True) 顶层的TaskSet（即被绑定到某个Locust类的task_set的第一层TaskSet）不能调用这个方法。reschedule置为True时，
+从被嵌套任务出来马上选择新任务执行，如果置为False，从被嵌套任务出来后，随机等待min_wait和max_wait之间的一段时间，再选择新任务执行。
+    tasks 属性   tasks = {stay:2} 表示每个用户执行 stay 的频率是2，也就的 UserTask 的两倍。
 然后在终端启动测试：
 > locust -f tc_load_test2.py --no-web -c 10 -r 10 -t 10s
 [2017-10-31 16:41:45,920] DESKTOP-SMGQBBM/INFO/locust.main: Run time limit set to 10 seconds
