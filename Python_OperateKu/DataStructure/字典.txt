@@ -62,29 +62,12 @@ parthan uses Ubuntu
 {'names': ['Ruby', 'Python', 'C']}
 
 试图索引一个不存在的键将会抛出一个 keyError 错误。我们可以使用 dict.get(key, default) 来索引键，如果键不存在，那么返回指定的 default 值。
-
 >>> data['foo']
 Traceback (most recent call last):
 File "<stdin>", line 1, in <module>
 KeyError: 'foo'
 >>> data.get('foo', 0)
 0
+如果只单独使用data.get('foo') #键不存在时，不会返回任何结果
 
-如果你想要在遍历列表（或任何序列类型）的同时获得元素索引值，你可以使用 enumerate()。
 
->>> for i, j in enumerate(['a', 'b', 'c']):
-...     print(i, j)
-...
-0 a
-1 b
-2 c
-
-你也许需要同时遍历两个序列类型，你可以使用 zip() 函数。
-
->>> a = ['Pradeepto', 'Kushal']
->>> b = ['OpenSUSE', 'Fedora']
->>> for x, y in zip(a, b):
-...     print("{} uses {}".format(x, y))
-...
-Pradeepto uses OpenSUSE
-Kushal uses Fedora
