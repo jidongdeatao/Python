@@ -33,3 +33,20 @@ list(a) #可以将元组、集合转化为列表
 列表支持拼接，使用加号+可以将一个列表与另一个接表结合
 列表支持嵌套，如x=[['a', 'b', 'c'], [1, 2, 3]]
 x[0][1]='b'
+
+如果你想要在遍历列表（或任何序列类型）的同时获得元素索引值，你可以使用 enumerate()。
+>>> for i, j in enumerate(['a', 'b', 'c']):
+...     print(i, j)
+...
+0 a
+1 b
+2 c
+
+你也许需要同时遍历两个序列类型，你可以使用 zip() 函数。
+>>> a = ['Pradeepto', 'Kushal']
+>>> b = ['OpenSUSE', 'Fedora']
+>>> for x, y in zip(a, b):
+...     print("{} uses {}".format(x, y))
+...
+Pradeepto uses OpenSUSE
+Kushal uses Fedora
