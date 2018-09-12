@@ -1,4 +1,4 @@
-Python的数据结构
+Python的数据结构：
 
 list - 列表
 tuple - 元组
