@@ -33,4 +33,5 @@ https://www.cnblogs.com/fnng/p/3415609.html
 
 将lettuce框架与selenium结合的项目：
 参考 project1
-    project2
+    project2(是project1的中文语言版）
+    project3(批量执行多个用例的项目)
