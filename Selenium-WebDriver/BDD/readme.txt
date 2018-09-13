@@ -2,7 +2,7 @@
 BDD:
 Behavior Driven Development
 
-lettue：
+lettuce：
 官网：
 https://pythonhosted.org/lettuce/
 GitHub：
@@ -30,3 +30,7 @@ lettuce使用Gherkin语言来描述测试功能、测试场景、测试步骤和
 了解BDD lettuce最通俗易懂的文章，来自虫师博客：
 https://www.cnblogs.com/fnng/p/3415609.html
 或者参考 easyExample.txt
+
+将lettuce框架与selenium结合的项目：
+参考 project1
+    project2
