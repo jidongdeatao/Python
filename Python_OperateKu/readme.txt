@@ -6,6 +6,8 @@ File_Operate:
   Excel_Operate
   CSV_Operate
   JSON_Operate
+  Ini_Operate
+  Yaml_Operate
   XML_Operate
   
  Threading 多线程
