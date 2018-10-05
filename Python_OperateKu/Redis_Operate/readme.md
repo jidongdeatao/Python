@@ -7,4 +7,4 @@ https://github.com/jidongdeatao/Database/tree/master/Redis
     https://github.com/andymccurdy/redis-py
 - 这个库安装也可以使用pip进行安装:
     pip install redis
-- 文档:
+- 文档:https://redis-py.readthedocs.io/en/latest/
