@@ -5,6 +5,6 @@ https://github.com/jidongdeatao/Database/tree/master/Redis
 - python操作Redis数据库使用redispy这个库
     GitHub:
     https://github.com/andymccurdy/redis-py
-    这个库安装也可以使用pip进行安装:
+- 这个库安装也可以使用pip进行安装:
     pip install redis
-    文档:
+- 文档:
