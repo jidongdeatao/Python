@@ -1,4 +1,4 @@
-Python操作ini配置文件--使用con
+Python操作ini配置文件--使用ConfigParser模块对ini文件进行管理：实现查询、添加、删除、保存
 
 ini配置文件格式：
 节： [session]
