@@ -2,7 +2,7 @@
 ## python简单操作mysql
 - 数据库的连接和简单获取数据改进之捕获异常
  #### 演示
-      ```
+      
       #encoding:utf-8
       import MySQLdb
       #捕获异常
@@ -27,4 +27,4 @@
           conn.close()
       except MySQLdb.Error as e:
           print('mysql error:%s' % e)
-      ```
+     
