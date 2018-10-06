@@ -1,0 +1,44 @@
+python操作mysql②python对mysql进行简单的增删改查
+
+1.设计mysql的数据库和表
+
+id:新闻的唯一标示
+title:新闻的标题
+content:新闻的内容
+created_at:新闻添加的时间
+types:新闻的类型
+image:新的缩略图
+author:作者
+view_count:浏览量
+is_valid:删除标记
+
+# 创建新闻数据库
+create database news charset=utf8;
+
+# 创建新闻表
+create table news(
+    id int primary key auto_increment,
+    title varchar(200) not null,
+    content varchar(2000) not null,
+    types varchar(10) not null,
+    image varchar(300) null,
+    author varchar(20) null,
+    view_count int default 0,
+    created_at datetime null,
+    is_valid smallint default 1
+) default charset="utf8";
+'''
+
+插入数据
+INSERT INTO `news` VALUES ('1', '朝鲜特种部队视频公布 展示士兵身体素质与意志', '新闻内容', '推荐', '/static/img/news/01.png', null, '0', null, '1');
+INSERT INTO `news` VALUES ('2', '男子长得像\"祁同伟\"挨打 打人者:为何加害检察官', '新闻内容', '百家', '/static/img/news/02.png', null, '0', null, '1');
+INSERT INTO `news` VALUES ('3', '导弹来袭怎么办？日本政府呼吁国民堕入地下通道', '新闻内容', '本地', '/static/img/news/03.png', null, '0', null, '1');
+INSERT INTO `news` VALUES ('4', '美监:朝在建能发射3发以上导弹的3000吨级新潜艇', '新闻内容', '推荐', '/static/img/news/04.png', null, '0', null, '1');
+INSERT INTO `news` VALUES ('5', '证监会：前发审委员冯小树违法买卖股票被罚4.99亿', '新闻内容', '百家', '/static/img/news/08.png', null, '0', null, '1');
+INSERT INTO `news` VALUES ('6', '外交部回应安倍参拜靖国神社:同军国主义划清界限', '新闻内容', '推荐', '/static/img/news/new1.jpg', null, '0', null, '1');
+INSERT INTO `news` VALUES ('7', '\"萨德\"供地违法？韩民众联名起诉要求撤回供地', '新闻内容', '百家', '/static/img/news/new2.jpg', null, '0', null, '1');
+INSERT INTO `news` VALUES ('10', '标题1', '新闻内容1', '推荐', '/static/img/news/01.png', null, '0', null, '1');
+
+
+2.python简单操作mysql之数据库的连接和简单获取数据
+详见lianxi1.py
