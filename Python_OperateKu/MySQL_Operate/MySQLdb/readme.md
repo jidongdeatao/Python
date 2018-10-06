@@ -1,6 +1,7 @@
 
 ## python简单操作mysql
 - 数据库的连接和简单获取数据改进之捕获异常
+ #### 演示
       ```python
       #encoding:utf-8
       import MySQLdb
@@ -9,7 +10,7 @@
       try:
           conn = MySQLdb.connect(
               host = '127.0.0.1x',
-              user = 'root',
+              user = 'root',  
               password = '',
               db = 'news',
               port = 3306,
