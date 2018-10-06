@@ -1,2 +1,4 @@
-python操作MongoDB数据库
-https://blog.csdn.net/reblue520/article/details/80553377
+# python操作MongoDB数据库
+## MongoDB介绍
+- 详情：https://github.com/jidongdeatao/Database/tree/master/MongoDB
+
