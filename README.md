@@ -1,5 +1,6 @@
 # Python
-## 一、[常用的python操作库](https://github.com/jidongdeatao/Python/tree/master/Python_OperateKu)
+## 一、常用的python操作库
+- [详见](https://github.com/jidongdeatao/Python/tree/master/Python_OperateKu)
 
 ## 二、Python框架
 ### 1.Python WEB框架的学习与研究
