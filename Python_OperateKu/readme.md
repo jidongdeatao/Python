@@ -9,6 +9,7 @@
   Yaml_Operate
   XML_Operate
 - URL_Operate :Request Urllib
+- Logging 日志处理
 - Threading 多线程
 - Multiprocessing 多进程
 - MySQL_Operate
