@@ -17,3 +17,7 @@ pip install pymongo
       方式3：使用URI
       > client3 = MongoClient('mongodb://localhost:27017/')
   * 详见： mongodb_operate.py
+## mongoengine
+- 安装
+pip install mongoengine
+- 文档
