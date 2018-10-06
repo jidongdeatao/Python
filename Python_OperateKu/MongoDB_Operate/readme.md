@@ -38,4 +38,4 @@ pip install mongoengine
   方式3：使用URI
   connect('students',host='mongodb://localhost/students')
   ```
-  * 详见： mongodb_engine_operate.py
+  * 详见： [mongodb_engine_operate.py](https://github.com/jidongdeatao/Python/blob/master/Python_OperateKu/MongoDB_Operate/mongodb_engine_operate.py)
