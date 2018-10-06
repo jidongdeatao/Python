@@ -1,0 +1,172 @@
+python操作mysql③python操作mysql的orm工具sqlaichemy安装配置和使用
+
+手册地址：
+http://docs.sqlalchemy.org/en/rel_1_1/orm/index.html
+
+安装
+D:\software\source_tar>pip install SQLALchemy
+
+检测是否安装成功
+D:\software\source_tar>python
+Python 3.5.2 (v3.5.2:4def2a2901a5, Jun 25 2016, 22:18:55) [MSC v.1900 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sqlalchemy
+
+
+mysql的orm库SQLALchemy的操作
+
+#coding:utf-8
+
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+
+'''
+    id int primary key auto_increment,
+    title varchar(200) not null,
+    content varchar(2000) not null,
+    tpes varchar(10) not null,
+    image varchar(300) null,
+    author varchar(20) null,
+    view_count int default 0,
+    created_at datetime null,
+    is_valid smallint default 1
+'''
+# 创建对象的基类
+Base = declarative_base()
+# 初始化数据库连接，注意要接上charset=utf8否则中文无法支持
+engine = create_engine("mysql://root:@localhost/news?charset=utf8")
+# 创建DBSession类型
+DBSession = sessionmaker(bind=engine)
+
+# 定义News对象
+class News(Base):
+    __tablename__ = 'news'
+    id = Column(Integer, primary_key=True)
+    title = Column(String(200), nullable=False)
+    content = Column(String(2000), nullable=False)
+    types = Column(String(10), nullable=False)
+    image = Column(String(300),)
+    author = Column(String(20),)
+    view_count = Column(Integer)
+    created_at = Column(DateTime)
+    is_valid = Column(Boolean)
+
+'''
+# 简单测试
+# 如果表不存在就创建表
+Base.metadata.create_all(engine)
+
+# 创建session对象:
+session = DBSession()
+# 创建新User对象，新增一条测试数据
+news01 = News(title='标题1', content = 'content01', types = 'baidu', 
+    image = '/static/img/01.jpg', author = 'jack', view_count = 3)
+# 添加到session:
+session.add(news01)
+# 提交即保存到数据库:
+session.commit()
+# 关闭session:
+session.close()
+'''
+
+# orm的测试类
+class OrmTest(object):
+    # 初始化创建session
+    def __init__(self):
+        self.session = DBSession()
+
+    # 添加数据
+    def add_one(self):
+        new_obj = News(
+            title = '标题20180202',
+            content = '内容20180202',
+            types = '百家'
+            )
+        self.session.add(new_obj)
+        self.session.commit()
+        return new_obj
+
+    # 添加多条数据
+    def add_more(self):
+        add_list = []
+        for i in range(10):
+            new_obj = News(title='标题%s'%str(i),content='内容%s'%str(i),types='百家%s'%str(i))
+            self.session.add(new_obj)
+            add_list.append(new_obj)
+        self.session.commit()
+        return add_list
+
+    # 删除数据
+    def delete_data(self):
+        data = self.session.query(News).get(51)
+        self.session.delete(data)
+        self.session.commit()
+
+    # 修改单条数据
+    def update_one(self, _id):
+        obj = self.session.query(News).get(_id)
+        if obj:
+            obj.is_valid = 0
+            self.session.add(obj)
+            self.session.commit()
+            return True
+
+        return False
+
+
+    # 修改多条数据
+    def update_data(self):
+        # filter_by的使用方法
+        # data_list = self.session.query(News).filter_by(is_valid = 0)
+
+        # filter的使用方法
+        data_list = self.session.query(News).filter(News.id > 45)
+        for data in data_list:
+            print(data.title)
+            data.is_valid = 1
+            self.session.add(data)
+        self.session.commit()
+
+    # 获取一条数据
+    def get_one(self):
+        return self.session.query(News).get(1)
+
+    # 获取多条数据
+    def get_more(self):
+        return self.session.query(News).filter_by(is_valid = 1)
+
+
+def main():
+    obj = OrmTest()
+    # rst = obj.add_one()
+    # print('id:%s, title:%s,content:%s,types = %s' % (rst.id,rst.title,rst.content,rst.types))
+
+    # 添加多条数据
+    # rst = obj.add_more()
+    # for _new in rst:
+    #     print('id:{0},title{1},content:{2}'.format(_new.id,_new.title,_new.content))
+
+    # 测试删除
+    # obj.delete_data()
+
+    # 修改单条数据
+    # print(obj.update_one(50))
+
+    # 修改多条数据
+    obj.update_data()
+
+    # 测试获取一条数据的函数
+    # rst = obj.get_one()
+    # print(rst.title)
+
+    # 获取多条数据
+    # rst = obj.get_more()
+    # for _news in rst:
+    #     print('news id: %s, title:%s, content:%s' % (_news.id,_news.title,_news.content))
+
+
+if __name__ == "__main__":
+    main()
