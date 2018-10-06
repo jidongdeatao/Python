@@ -6,3 +6,5 @@
 pip install pymongo
 - 文档
   * https://github.com/mongodb/mongo-python-driver
+- 示例
+  * 详见： mongodb_operate.py
