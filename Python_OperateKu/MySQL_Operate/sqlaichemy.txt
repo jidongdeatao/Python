@@ -1,4 +1,4 @@
-python操作mysql③python操作mysql的orm工具sqlaichemy安装配置和使用
+python操作mysql的orm工具sqlaichemy安装配置和使用
 
 手册地址：
 http://docs.sqlalchemy.org/en/rel_1_1/orm/index.html
