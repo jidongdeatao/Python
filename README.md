@@ -1,5 +1,5 @@
 # Python
-## [常用的python操作库]
+## [常用的python操作库](https://github.com/jidongdeatao/Python/tree/master/Python_OperateKu)
 
 ## 1.Python WEB框架的学习与研究
   - 详见 [WEB Framework](https://github.com/jidongdeatao/Python/tree/master/Web%20Framework)
