@@ -5,3 +5,4 @@
 - 安装
 pip install pymongo
 - 文档
+  * https://github.com/mongodb/mongo-python-driver
