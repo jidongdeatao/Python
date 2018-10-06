@@ -3,9 +3,8 @@
   '''python
   #encoding:utf-8
   import MySQLdb
-
-  # 捕获异常
-  # 获取连接
+  #捕获异常
+  #获取连接
   try:
       conn = MySQLdb.connect(
           host = '127.0.0.1x',
