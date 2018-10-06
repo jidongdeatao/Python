@@ -17,7 +17,7 @@ pip install pymongo
       方式3：使用URI
       > client3 = MongoClient('mongodb://localhost:27017/')
       ```
-  * 详见： mongodb_operate.py
+  * 详见：[ mongodb_operate.py](https://github.com/jidongdeatao/Python/blob/master/Python_OperateKu/MongoDB_Operate/mongodb_operate.py)
 ## MongoDB ODM
 
 ### mongoengine
