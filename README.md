@@ -1,6 +1,6 @@
 # Python
 
-1.Django WEB框架的学习与研究，详见WEB Framework
+## Python WEB框架的学习与研究
 
 2.Scrapy 爬虫框架的学习与研究，详见Spider Project
 
