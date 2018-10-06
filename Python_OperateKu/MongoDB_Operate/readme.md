@@ -8,11 +8,11 @@ pip install pymongo
   * https://github.com/mongodb/mongo-python-driver
 - 示例
   * 连接本地数据库方式
-    方式1：简写
+    + 方式1：简写
       > from pymongo import MongoClient
       > client = MongoClient()
-    方式2：指定端口和地址
+    + 方式2：指定端口和地址
       > client2 = MongoClient('localhost', 27017)
-    方式3：使用URI
+    + 方式3：使用URI
       > client3 = MongoClient('mongodb://localhost:27017/')
   * 详见： mongodb_operate.py
